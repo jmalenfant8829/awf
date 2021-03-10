@@ -21,7 +21,7 @@ router.post('/register', function (req, res) {
             if (err) {
                 return res.json({ success: false, msg: 'User already exists.' });
             }
-            res.json({ success: true, msg: 'Successful created new user.' });
+            res.json({ success: true, msg: 'Successfully created new user.' });
         });
     }
 });
