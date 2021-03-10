@@ -18,9 +18,8 @@ var quizSchema = new mongoose.Schema(
                 type: mongoose.Schema.ObjectId,
                 ref: "User",
             }
-        ]
+        ],
     }
 );
-
 
 module.exports = mongoose.model("Quiz", quizSchema);
