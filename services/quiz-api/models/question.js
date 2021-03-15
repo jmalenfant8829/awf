@@ -9,17 +9,8 @@ var questionSchema = new mongoose.Schema({
     // possible answers to quiz question
     answers: [
         {
-            description: {
-                type: String,
-                required: true,
-            }
-        },
-        {
-            isCorrect: {
-                type: Boolean,
-                required: true,
-                default: false
-            }
+            type: mongoose.Schema.ObjectId,
+            ref: "Answer",
         },
     ],
 });

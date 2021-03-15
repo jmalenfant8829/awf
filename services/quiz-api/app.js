@@ -1,3 +1,4 @@
+require('cache-require-paths');
 require('dotenv').config();
 var express = require('express');
 var path = require('path');

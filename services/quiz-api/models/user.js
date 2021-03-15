@@ -1,17 +1,26 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var bcrypt = require('bcrypt');
+var validate = require('mongoose-validator');
 
-var UserSchema = new Schema({ //todo: add email
+var emailValidator = [
+    validate({
+        validator: 'isEmail',
+        message: 'Invalid Email',
+    }),
+];
+
+var UserSchema = new Schema({ //todo: add email validation
     username: {
         type: String,
         unique: true,
-        required: true
+        required: true,
     },
     email: {
         type: String,
         required: true,
         unique: true,
+        validate: emailValidator,
     },
     password: {
         type: String,
@@ -63,4 +72,5 @@ UserSchema.methods.comparePassword = function (passw, cb) {
 };
 
 
-module.exports = mongoose.model('User', UserSchema);
+var User = mongoose.model('User', UserSchema);
+module.exports = User;
