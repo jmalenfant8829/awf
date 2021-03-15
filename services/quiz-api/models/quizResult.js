@@ -1,29 +1,17 @@
 const mongoose = require("mongoose");
 
 var quizResultSchema = new mongoose.Schema({
-    // text description of quiz question
-    quizId: {
-        type: mongoose.Schema.ObjectId,
-        ref: "Quiz",
-    },
+    // user who submitted the quiz
     userId:{
         type: mongoose.Schema.ObjectId,
         ref: "User",
             
     },
-    // list of questions with the selected answer
-    results: [
+    // list of selected quiz answers
+    selectedAnswers: [
         {
-            questions: {
-                type: mongoose.Schema.ObjectId,
-                ref: "Question",
-            }
-        },
-        {
-            selected: {
-                type: Number,
-                required: true,
-            }
+            type: mongoose.Schema.ObjectId,
+            ref: "Answer",
         },
     ],
 });
