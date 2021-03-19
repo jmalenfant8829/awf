@@ -1,34 +1,9 @@
-var expect = require('chai').expect;
-var User = require("../../models/user");
+const expect = require('chai').expect;
+const User = require("../../models/user");
 const faker = require('faker');
-var mongoose = require('mongoose');
+
 
 describe("User Model", function() {
-
-    //set up db for testing user model
-    before(function() {
-        mongoose.connect("mongodb://localhost:27017/awf-test-user-model",
-            {
-                useCreateIndex: true,
-                useNewUrlParser: true,
-                useUnifiedTopology: true
-            }
-        );
-    });
-
-    // clear db before each test run
-    beforeEach((done) => {
-        mongoose.connection.collections.users.drop(() => {
-            done();
-        }); 
-    });
-
-    //drop db after testing completed
-    after(function (done) {
-        mongoose.connection.db.dropDatabase(function () {
-            mongoose.connection.close(done);
-        });
-    });
 
     it('should be invalid if username is empty', function(done) {
         var user = new User({

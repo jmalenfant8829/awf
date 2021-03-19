@@ -4,19 +4,39 @@ var Quiz = require("../../models/quiz");
 var Question = require("../../models/question");
 var Answer = require("../../models/answer");
 const faker = require('faker');
+const getTestUser = require("../../testUtils/schemaSamples").getTestUser;
 
 describe("Quiz Model", function () {
 
+    var testUser;
+
+    beforeEach(async () => {
+        testUser = getTestUser();
+    });
+
     it('should be invalid without title', function (done) {
-        var quiz = new Quiz();
+        var quiz = new Quiz({
+            userId: testUser.id,
+        });
         quiz.validate(function (err) {
             expect(err.errors.title).to.exist;
             done();
         });
     });
 
-    it('should be valid with valid title', function (done) {
+    it('should be invalid without user', function (done) {
         var quiz = new Quiz({
+            title: faker.lorem.sentence(),
+        });
+        quiz.validate(function (err) {
+            expect(err.errors.userId).to.exist;
+            done();
+        });
+    });
+
+    it('should be valid with valid title and user', function (done) {
+        var quiz = new Quiz({
+            userId: testUser.id,
             title: faker.lorem.sentence(),
         });
         quiz.validate(function (err) {
@@ -27,6 +47,7 @@ describe("Quiz Model", function () {
 
     it('should be valid given valid array of users who have liked quiz', function (done) {
         var quiz = new Quiz({
+            userId: testUser.id,
             title: faker.lorem.sentence(),
             likers: [
                 new User({
@@ -50,6 +71,7 @@ describe("Quiz Model", function () {
 
     it('should be valid given valid array of questions', function (done) {
         var quiz = new Quiz({
+            userId: testUser.id,
             title: faker.lorem.sentence(),
             questions: [
                 new Question({

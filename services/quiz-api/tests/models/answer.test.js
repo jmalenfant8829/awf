@@ -1,8 +1,15 @@
 var expect = require('chai').expect;
 var Answer = require("../../models/answer");
 const faker = require('faker');
+const getTestUser = require("../../testUtils/schemaSamples").getTestUser;
 
 describe("Answer Model", function () {
+
+    var user;
+
+    beforeEach(async () => {
+        user = getTestUser();
+    });
 
     it('should be invalid without answer description', function (done) {
         var answer = new Answer({
@@ -16,6 +23,7 @@ describe("Answer Model", function () {
 
     it('should be valid with valid description', function (done) {
         var answer = new Answer({
+            questionId: user.createdQuizzes[0].questions[0].id,
             description: faker.lorem.sentence(),
             isCorrect: true,
         });

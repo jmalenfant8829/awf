@@ -10,7 +10,7 @@ var emailValidator = [
     }),
 ];
 
-var UserSchema = new Schema({ //todo: add email validation
+var userSchema = new Schema({ //todo: add email validation
     username: {
         type: String,
         unique: true,
@@ -39,10 +39,17 @@ var UserSchema = new Schema({ //todo: add email validation
             ref: "Quiz",
         }
     ],
+    quizScores: [
+        {
+            type: mongoose.Schema.ObjectId,
+            ref: "QuizResult",
+        }
+    ],
 });
 
 // encrypts password on save
-UserSchema.pre('save', function (next) {
+userSchema.pre('save', function (next) {
+    // generate password
     var user = this;
     if (this.isModified('password') || this.isNew) {
         bcrypt.genSalt(10, function (err, salt) {
@@ -62,7 +69,27 @@ UserSchema.pre('save', function (next) {
     }
 });
 
-UserSchema.methods.comparePassword = function (passw, cb) {
+// cascade save
+// userSchema.pre('save', function (next) {
+//     var user = this;
+
+// });
+
+// cascade delete
+// userSchema.pre('remove', function(next) {
+//     User.updateMany(
+//         { quizScores : this._id},
+//         { $pull: { quizScores: this._id } }
+//     ).exec();
+
+//     User.updateMany(
+//         { createdQuizzes : this._id},
+//         { $pull: { createdQuizzes: this._id } }
+//     ).exec();
+//     next();
+// });
+
+userSchema.methods.comparePassword = function (passw, cb) {
     bcrypt.compare(passw, this.password, function (err, isMatch) {
         if (err) {
             return cb(err);
@@ -72,5 +99,5 @@ UserSchema.methods.comparePassword = function (passw, cb) {
 };
 
 
-var User = mongoose.model('User', UserSchema);
+var User = mongoose.model('User', userSchema);
 module.exports = User;
