@@ -27,4 +27,8 @@ var quizSchema = new mongoose.Schema(
     }
 );
 
+//Add index for search by text functionality
+//mongo uses snowball stemming for search 
+quizSchema.index({title: 'text'});
+
 module.exports = mongoose.model("Quiz", quizSchema);

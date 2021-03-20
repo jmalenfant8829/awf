@@ -21,7 +21,10 @@ function create(req, res) {
     })
     .then((savedQuiz) => {
         return res.json(savedQuiz);
-    }, (e) => next(e));
+    }, (e) => next(e))
+    .catch((err) => {
+        res.status(500).json({message: 'Error ', err})
+    })
 }
 
 function update(req, res, next) {
@@ -33,8 +36,10 @@ function update(req, res, next) {
 }
 
 function list(req, res, next) {
+    const searchString = req.query.search
+
     const {limit = 50, skip = 0 } = req.query;
-    Quiz.find()
+    Quiz.find({$text: {$search: searchString}})
         .skip(skip)
         .limit(limit)
         .exec()
@@ -51,6 +56,16 @@ function remove(req, res, next) {
 
 function like(req, res, next) {
     //const {limit = }
+}
+
+function search(req, res, next) {
+    const searchString = req.body.search
+    Quiz.find({$text: {$search: searchString}})
+        .skip(20)
+        .limit(10)
+        .exec()
+        .then((quizzes) => res.json(quizzes),
+        (e) => next(e));
 }
 
 function submit(req, res, next) {
