@@ -24,6 +24,7 @@ app.use(cookieParser());
 
 //define routes
 var api = require('./routes/api');
+var quizApi = require('./routes/quiz/api')
 app.use('/api', api);
-
+app.use('/api', quizApi);
 module.exports = app;
