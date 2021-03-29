@@ -1,0 +1,11 @@
+@import "../../variables.scss";
+
+.btn {
+  border: 0;
+  border-radius: $border-radius-normal;
+
+  &--large {
+    width: 10rem;
+    height: 5rem;
+  }
+}
