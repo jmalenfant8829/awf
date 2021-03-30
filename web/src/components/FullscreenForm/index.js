@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from "./FullscreenForm.module.scss"
 import PropTypes from "prop-types"
-import Heading from '../Button/Heading'
+import Heading from '../Heading'
 
 const FullscreenForm = (props) => {
     return (

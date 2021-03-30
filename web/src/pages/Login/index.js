@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Button from '../../components/Button';
-import BackgroundGradient from '../../components/Button/BackgroundGradient';
-import Heading from '../../components/Button/Heading';
+import BackgroundGradient from '../../components/BackgroundGradient';
+import Heading from '../../components/Heading';
 import FullscreenForm from '../../components/FullscreenForm';
 import TextInput from '../../components/TextInput';
 import styles from "./Login.module.scss";
