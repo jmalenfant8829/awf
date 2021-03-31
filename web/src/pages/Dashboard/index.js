@@ -1,11 +1,25 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import Button from '../../components/Button'
 import Heading from '../../components/Heading'
+import { destroyToken } from '../../utils/tokenUtils'
 import styles from "./Dashboard.module.scss"
 
 class Dashboard extends Component {
+    onLogOutClick = () => {
+        destroyToken()
+
+        window.location.href = "/"
+    }
+
     render() {
+        const { user } = this.props;
+
+        if (!user) {
+            return <h1>Loading...</h1>
+        }
+
         return (
             <>
                 <header className={styles.header}>
@@ -13,8 +27,8 @@ class Dashboard extends Component {
                         <h1>Quizzery</h1>
 
                         <div className={styles['topbar--items']}>
-                            <p>janedoe</p>
-                            <Button size="nav" color="dark">Log out</Button>
+                            <p>{user.username}</p>
+                            <Button size="nav" color="dark" onClick={this.onLogOutClick}>Log out</Button>
                         </div>
                     </div>
 
@@ -35,4 +49,8 @@ class Dashboard extends Component {
     }
 }
 
-export default Dashboard
+const mapStateToProps = (state) => ({
+    user: state.user.self,
+})
+
+export default connect(mapStateToProps)(Dashboard)

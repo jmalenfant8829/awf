@@ -5,9 +5,9 @@ const postHeaders = {
 };
 
 export function registerUser(data) {
-    return axios.post("/api/auth/register", data, postHeaders)
+    return axios.post("/api/register", data, postHeaders)
 }
 
 export function loginUser(data) {
-    return axios.post("/api/auth/login", data, postHeaders)
+    return axios.post("/api/login", data, postHeaders)
 }

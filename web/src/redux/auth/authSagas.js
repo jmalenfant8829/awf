@@ -1,11 +1,12 @@
 import { all, call, put, takeLatest } from 'redux-saga/effects';
 import { loginUser, registerUser } from '../../api/authApi';
+import { decodeToken, setToken } from '../../utils/tokenUtils';
 import { setUser } from '../user/userActions';
 import { LOG_IN_USER, REGISTER_USER, SIGN_UP_USER } from "./authActions"
 
 function* registerUserAsync(action) {
     try {
-        const { data } = call(registerUser, action.payload)
+        const { data } = yield call(registerUser, action.payload)
 
         console.log(data)
 
@@ -19,12 +20,17 @@ function* registerUserAsync(action) {
 
 function* logInUserAsync(action) {
     try {
-        const { data } = call(loginUser, action.payload)
+        const { data } = yield call(loginUser, action.payload)
 
         console.log(data)
 
         // TODO: Determine response structure and pass in proper data to the setUser call below
-        // yield put(setUser(data.payload))
+        yield setToken(data.token)
+        const decoded = yield decodeToken(data.token)
+        yield put(setUser({
+            isAuthenticated: true,
+            ...decoded
+        }))
 
         // TODO: Link to error and success reducers
     } catch (err) {
