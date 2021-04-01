@@ -2,6 +2,8 @@ var Quiz = require("../models/quiz")
 
 function load(req, res, next, id){
     Quiz.findById(id)
+        .populate('questions')
+        .populate('likers')
         .exec()
         .then((quiz) => {
             req.dbQuiz = quiz;
@@ -11,14 +13,11 @@ function load(req, res, next, id){
 }
 
 function get(req, res) {
-    return res.json(req.dbQuiz)
+    return res.json(req.dbQuiz)  
 }
 
 function create(req, res) {
-    Quiz.create({
-        userId: req.body.userId,
-        title: req.body.title,
-    })
+    Quiz.create(req.body)
     .then((savedQuiz) => {
         return res.json(savedQuiz);
     }, (e) => next(e))
@@ -36,15 +35,16 @@ function update(req, res, next) {
 }
 
 function list(req, res, next) {
-    const searchString = req.query.search
-
     const {limit = 50, skip = 0 } = req.query;
-    Quiz.find({$text: {$search: searchString}})
+    Quiz.find()
+        .populate('questions')
+        .populate('likers')
         .skip(skip)
         .limit(limit)
         .exec()
         .then((quizzes) => res.json(quizzes),
         (e) => next(e));
+    
 }
 
 function remove(req, res, next) {
@@ -59,16 +59,14 @@ function like(req, res, next) {
 }
 
 function search(req, res, next) {
-    const searchString = req.body.search
+    const searchString = req.query.search
+    console.log(searchString)
     Quiz.find({$text: {$search: searchString}})
-        .skip(20)
         .limit(10)
         .exec()
         .then((quizzes) => res.json(quizzes),
         (e) => next(e));
 }
 
-function submit(req, res, next) {
 
-}
-module.exports = { load, get, create, update, list, remove, like };
+module.exports = { load, get, create, update, list, remove, like, search };

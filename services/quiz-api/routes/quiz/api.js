@@ -13,28 +13,19 @@ router.route('/quiz')
     .get(quizCtrl.list)
     .post(quizCtrl.create);
 
+router.route('/quiz/search')
+    .get(quizCtrl.search)
 
 //Fetches question and other data for a single quiz
 router.route('/quiz/:quizId')
     .get(quizCtrl.get)
     .patch(quizCtrl.update)
     .delete(quizCtrl.remove);
-    //.post(quizCtrl)
-
 
 router.route('/quiz/like/:quizId')
     .get(quizCtrl.like);
 
 router.param('quizId', quizCtrl.load);
+
 module.exports = router;
 
-// //Submits a response for a quiz. 
-// //Expected Data: Answer Data (JSON)
-// router.post('/quiz/:quizId', function(req, res){
-
-// });
-
-// //Like a quiz if it is not already liked, unlike it if it is already liked
-// router.get('/quiz/like/:quizId', function(req, res){
-
-// });

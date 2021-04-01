@@ -1,22 +1,18 @@
 const mongoose = require("mongoose");
+var Question = require("./question").schema
 
 var quizSchema = new mongoose.Schema(
     {
         userId: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User',
-            required: true,
+            //required: true,
         },
         title: {
             type: String,
             required: true,
         },
-        questions: [
-            {
-                type: mongoose.Schema.ObjectId,
-                ref: "Question",
-            },
-        ],
+        questions: [ Question ],
         //users who liked this quiz
         likers: [
             {
