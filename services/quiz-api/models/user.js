@@ -32,13 +32,13 @@ var userSchema = new Schema({ //todo: add email validation
             ref: "Quiz",
         }
     ],
-    // quizzes user liked
-    likedQuizzes: [
-        {
-            type: mongoose.Schema.ObjectId,
-            ref: "Quiz",
-        }
-    ],
+    // // quizzes user liked
+    // likedQuizzes: [
+    //     {
+    //         type: mongoose.Schema.ObjectId,
+    //         ref: "Quiz",
+    //     }
+    // ],
     quizScores: [
         {
             type: mongoose.Schema.ObjectId,

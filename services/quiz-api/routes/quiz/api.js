@@ -22,7 +22,7 @@ router.route('/quiz/:quizId')
     .patch(quizCtrl.update)
     .delete(quizCtrl.remove);
 
-router.route('/quiz/like/:quizId')
+router.route('/quiz/:quizId/like')
     .get(quizCtrl.like);
 
 router.param('quizId', quizCtrl.load);

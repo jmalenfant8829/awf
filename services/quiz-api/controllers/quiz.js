@@ -1,9 +1,9 @@
 var Quiz = require("../models/quiz")
+var User = require("../models/user")
 
 function load(req, res, next, id){
     Quiz.findById(id)
         .populate('questions')
-        .populate('likers')
         .exec()
         .then((quiz) => {
             req.dbQuiz = quiz;
@@ -19,6 +19,8 @@ function get(req, res) {
 function create(req, res) {
     Quiz.create(req.body)
     .then((savedQuiz) => {
+        User.findByIdAndUpdate(savedQuiz.userId, { $push: { createdQuizzes: savedQuiz.id } })
+        .then((result) => console.log(result))
         return res.json(savedQuiz);
     }, (e) => next(e))
     .catch((err) => {
@@ -49,13 +51,27 @@ function list(req, res, next) {
 
 function remove(req, res, next) {
     const quiz = req.dbQuiz;
+    Object.assign(quiz)
     quiz.remove()
         .then(() => res.sendStatus(204),
             (e) => next(e));
 }
 
 function like(req, res, next) {
-    //const {limit = }
+    const quiz = req.dbQuiz;
+    Object.assign(quiz, req.body);
+    userId = req.query.user
+    var idx = quiz.likers ? quiz.likers.indexOf(userId) : -1;
+    // is it valid?
+    if (idx !== -1) {
+        // remove it from the array.
+        quiz.likers.splice(idx, 1);
+    }
+    else {
+        quiz.likers.push(userId)
+    }
+    console.log(quiz)
+    quiz.save(() => res.sendStatus(204))
 }
 
 function search(req, res, next) {
