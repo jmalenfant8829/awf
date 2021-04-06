@@ -17,14 +17,6 @@ describe("Quiz Result Model", function () {
         await testUser.createdQuizzes[0].save();
         await testUser.createdQuizzes[1].save();
 
-        await testUser.createdQuizzes[0].questions[0].save();
-        await testUser.createdQuizzes[0].questions[1].save();
-        await testUser.createdQuizzes[1].questions[0].save();
-
-        await testUser.createdQuizzes[0].questions[0].answers[0].save();
-        await testUser.createdQuizzes[0].questions[1].answers[1].save();
-        await testUser.createdQuizzes[1].questions[0].answers[0].save();
-
         var quizResult = new QuizResult({
             userId: testUser.id,
             quizId: testUser.createdQuizzes[0].id,
@@ -49,12 +41,6 @@ describe("Quiz Result Model", function () {
     it('should be valid with answers from one specific quiz', async () => {
         await testUser.save();
         await testUser.createdQuizzes[0].save();
-
-        await testUser.createdQuizzes[0].questions[0].save();
-        await testUser.createdQuizzes[0].questions[1].save();
-
-        await testUser.createdQuizzes[0].questions[0].answers[0].save();
-        await testUser.createdQuizzes[0].questions[1].answers[1].save();
 
         var quizResult = new QuizResult({
             userId: testUser.id,
