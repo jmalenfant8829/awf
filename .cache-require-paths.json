@@ -9,7 +9,8 @@
     "mongoose": "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\node_modules\\mongoose\\index.js",
     "passport": "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\node_modules\\passport\\lib\\index.js",
     "./config/database": "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\config\\database.js",
-    "./routes/auth": "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\routes\\auth.js"
+    "./routes/auth": "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\routes\\auth.js",
+    "./routes/quiz/api": "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\routes\\quiz\\api.js"
   },
   "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\node_modules\\dotenv\\lib\\main.js": {
     "fs": "fs",
@@ -457,5 +458,13 @@
   "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\node_modules\\passport-jwt\\lib\\extract_jwt.js": {
     "url": "url",
     "./auth_header": "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\node_modules\\passport-jwt\\lib\\auth_header.js"
+  },
+  "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\routes\\quiz\\api.js": {
+    "../../controllers/quiz": "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\controllers\\quiz.js",
+    "express": "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\node_modules\\express\\index.js"
+  },
+  "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\controllers\\quiz.js": {
+    "../models/quiz": "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\models\\quiz.js",
+    "../models/user": "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\models\\user.js"
   }
 }

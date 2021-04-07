@@ -24,16 +24,6 @@ describe("Quiz Model", function () {
         });
     });
 
-    it('should be invalid without user', function (done) {
-        var quiz = new Quiz({
-            title: faker.lorem.sentence(),
-        });
-        quiz.validate(function (err) {
-            expect(err.errors.userId).to.exist;
-            done();
-        });
-    });
-
     it('should be valid with valid title and user', function (done) {
         var quiz = new Quiz({
             userId: testUser.id,

@@ -23,7 +23,6 @@ describe("Answer Model", function () {
 
     it('should be valid with valid description', function (done) {
         var answer = new Answer({
-            questionId: user.createdQuizzes[0].questions[0].id,
             description: faker.lorem.sentence(),
             isCorrect: true,
         });

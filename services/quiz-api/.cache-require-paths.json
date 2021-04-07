@@ -346,7 +346,8 @@
     "express": "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\node_modules\\express\\index.js"
   },
   "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\controllers\\quiz.js": {
-    "../models/quiz": "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\models\\quiz.js"
+    "../models/quiz": "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\models\\quiz.js",
+    "../models/user": "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\models\\user.js"
   },
   "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\routes\\auth.js": {
     "mongoose": "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\node_modules\\mongoose\\index.js",
@@ -734,5 +735,20 @@
   },
   "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\node_modules\\mongoose\\lib\\utils.js": {
     "./document": "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\node_modules\\mongoose\\lib\\document.js"
+  },
+  "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\node_modules\\mongoose\\lib\\schema\\documentarray.js": {
+    "../types/documentarray": "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\node_modules\\mongoose\\lib\\types\\documentarray.js"
+  },
+  "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\node_modules\\mocha\\lib\\interfaces\\bdd.js": {
+    "./common": "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\node_modules\\mocha\\lib\\interfaces\\common.js"
+  },
+  "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\node_modules\\mocha\\lib\\esm-utils.js": {
+    "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\tests\\api\\auth\\register.test.js": "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\tests\\api\\auth\\register.test.js",
+    "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\tests\\models\\answer.test.js": "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\tests\\models\\answer.test.js",
+    "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\tests\\models\\question.test.js": "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\tests\\models\\question.test.js",
+    "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\tests\\models\\quiz.test.js": "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\tests\\models\\quiz.test.js",
+    "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\tests\\models\\quizResults.test.js": "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\tests\\models\\quizResults.test.js",
+    "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\tests\\models\\testDbSetup.js": "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\tests\\models\\testDbSetup.js",
+    "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\tests\\models\\user.test.js": "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\tests\\models\\user.test.js"
   }
 }

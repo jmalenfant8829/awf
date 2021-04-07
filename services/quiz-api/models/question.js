@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-var Answer = require("./answer").schema
+var Answer = require("./answer").schema;
 
 var questionSchema = new mongoose.Schema({
     // text description of quiz question
