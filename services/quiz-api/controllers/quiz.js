@@ -20,7 +20,6 @@ function create(req, res) {
     Quiz.create(req.body)
     .then((savedQuiz) => {
         User.findByIdAndUpdate(savedQuiz.userId, { $push: { createdQuizzes: savedQuiz.id } })
-        .then((result) => console.log(result))
         return res.json(savedQuiz);
     }, (e) => next(e))
     .catch((err) => {
@@ -70,13 +69,11 @@ function like(req, res, next) {
     else {
         quiz.likers.push(userId)
     }
-    console.log(quiz)
     quiz.save(() => res.sendStatus(204))
 }
 
 function search(req, res, next) {
     const searchString = req.query.search
-    console.log(searchString)
     Quiz.find({$text: {$search: searchString}})
         .limit(10)
         .exec()
