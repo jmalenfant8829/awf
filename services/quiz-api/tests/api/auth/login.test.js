@@ -11,9 +11,8 @@ describe("Login Route", function () {
 
     var testUser;
 
-    beforeEach((done) => {
-        testUser = getTestUser();
-        done();
+    beforeEach(async () => {
+        testUser = await getTestUser();
     });
 
     it('should log in given valid credentials', async () => {
@@ -24,14 +23,13 @@ describe("Login Route", function () {
 
         await testUser.save();
 
-        chai.request(app)
+        res = await chai.request(app)
             .post("/api/auth/login")
-            .send(login)
-            .end((err, res) => {
-                expect(res).to.have.status(200);
-                expect(res.body.success).to.be.true;
-                expect(res.body.token).to.exist;
-            });
+            .send(login);
+
+        expect(res).to.have.status(200);
+        expect(res.body.success).to.be.true;
+        expect(res.body.token).to.exist;
     });
 
     it('should not log in given invalid password', async () => {
@@ -42,13 +40,12 @@ describe("Login Route", function () {
 
         await testUser.save();
 
-        chai.request(app)
+        res = await chai.request(app)
             .post("/api/auth/login")
-            .send(login)
-            .end((err, res) => {
-                expect(res).to.have.status(401);
-                expect(res.body.success).to.be.false;
-            });
+            .send(login);
+
+        expect(res).to.have.status(401);
+        expect(res.body.success).to.be.false;
     });
 
     it('should not log in given nonexistent username', async () => {
@@ -59,13 +56,12 @@ describe("Login Route", function () {
 
         await testUser.save();
 
-        chai.request(app)
+        res = await chai.request(app)
             .post("/api/auth/login")
-            .send(login)
-            .end((err, res) => {
-                expect(res).to.have.status(401);
-                expect(res.body.success).to.be.false;
-            });
+            .send(login);
+
+        expect(res).to.have.status(401);
+        expect(res.body.success).to.be.false;
     });
 
     it('should not log in without username', async () => {
@@ -75,13 +71,12 @@ describe("Login Route", function () {
 
         await testUser.save();
 
-        chai.request(app)
+        res = await chai.request(app)
             .post("/api/auth/login")
-            .send(login)
-            .end((err, res) => {
-                expect(res).to.have.status(401);
-                expect(res.body.success).to.be.false;
-            });
+            .send(login);
+
+        expect(res).to.have.status(401);
+        expect(res.body.success).to.be.false;
     });
 
     it('should not log in without password', async () => {
@@ -91,13 +86,11 @@ describe("Login Route", function () {
 
         await testUser.save();
 
-        chai.request(app)
-            .post("/api/auth/login")
-            .send(login)
-            .end((err, res) => {
-                expect(res).to.have.status(401);
-                expect(res.body.success).to.be.false;
-            });
+        res = await chai.request(app)
+            .post("/api/auth/login");
+
+        expect(res).to.have.status(401);
+        expect(res.body.success).to.be.false;
     });
 
 });
