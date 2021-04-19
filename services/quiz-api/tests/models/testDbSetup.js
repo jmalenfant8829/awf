@@ -4,7 +4,7 @@ mongoose.Promise = global.Promise;
 
 before(async () => {
     
-    await mongoose.connect(process.env.TEST_DB_URL,
+    await mongoose.connect(process.env.DB_URL,
         {
             useCreateIndex: true,
             useNewUrlParser: true,
