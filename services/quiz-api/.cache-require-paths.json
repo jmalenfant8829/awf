@@ -647,7 +647,8 @@
     "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\tests\\models\\quiz.test.js": "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\tests\\models\\quiz.test.js",
     "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\tests\\models\\quizResults.test.js": "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\tests\\models\\quizResults.test.js",
     "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\tests\\models\\testDbSetup.js": "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\tests\\models\\testDbSetup.js",
-    "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\tests\\models\\user.test.js": "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\tests\\models\\user.test.js"
+    "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\tests\\models\\user.test.js": "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\tests\\models\\user.test.js",
+    "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\tests\\api\\auth\\quiz.test.js": "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\tests\\api\\auth\\quiz.test.js"
   },
   "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\tests\\api\\auth\\register.test.js": {
     "chai": "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\node_modules\\chai\\index.js",
@@ -749,7 +750,8 @@
     "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\tests\\models\\quiz.test.js": "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\tests\\models\\quiz.test.js",
     "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\tests\\models\\quizResults.test.js": "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\tests\\models\\quizResults.test.js",
     "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\tests\\models\\testDbSetup.js": "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\tests\\models\\testDbSetup.js",
-    "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\tests\\models\\user.test.js": "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\tests\\models\\user.test.js"
+    "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\tests\\models\\user.test.js": "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\tests\\models\\user.test.js",
+    "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\tests\\api\\auth\\quiz.test.js": "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\tests\\api\\auth\\quiz.test.js"
   },
   "/app/app.js": {
     "express": "/app/node_modules/express/index.js",
@@ -1490,5 +1492,11 @@
   },
   "/app/node_modules/mongoose/lib/utils.js": {
     "./document": "/app/node_modules/mongoose/lib/document.js"
+  },
+  "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\tests\\api\\auth\\quiz.test.js": {
+    "chai": "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\node_modules\\chai\\index.js",
+    "chai-http": "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\node_modules\\chai-http\\index.js",
+    "../../../app": "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\app.js",
+    "../../../testUtils/schemaSamples": "C:\\Users\\julie\\2021-dev\\awf\\services\\quiz-api\\testUtils\\schemaSamples.js"
   }
 }
