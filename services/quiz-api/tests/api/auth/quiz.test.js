@@ -5,7 +5,6 @@ const app = require("../../../app");
 const getTestUser = require("../../../testUtils/schemaSamples").getTestUser;
 
 chai.use(chaiHttp);
-
 describe('Quiz tests', () => {
 
     var testUser;
@@ -13,7 +12,7 @@ describe('Quiz tests', () => {
     beforeEach( async () => {
         testUser = await getTestUser();
     });
-
+  
     describe('GET api/quiz/', function() {
 
         it('gets all quizzes', async () => {
@@ -28,7 +27,7 @@ describe('Quiz tests', () => {
             expect(res.body[0]._id).to.equal(String(testQuiz._id));
         });
     });
-
+    
     describe('POST api/quiz/', function() {
         it('creates a new quiz', function(done) {
             chai.request(app)
@@ -61,7 +60,7 @@ describe('Quiz tests', () => {
                 });
         });
     });
-
+ 
     describe('PATCH api/quiz/:id', function() {
         it('updates a quiz', async() => {
 
