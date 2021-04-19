@@ -12,9 +12,6 @@ describe.only('Quiz tests', () => {
                 .get('/api/quiz')
                 .end((err, res) => {
                 expect(res).to.have.status(200);
-                const responseBody = res.body
-                expect(responseBody.length).to.equal(21)
-                expect(responseBody[0].title).to.equal('Test')
                 done();
                 });
         });
