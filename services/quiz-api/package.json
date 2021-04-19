@@ -9,6 +9,7 @@
   "dependencies": {
     "bcrypt": "^5.0.1",
     "body-parser": "^1.18.3",
+    "cache-require-paths": "^0.3.0",
     "chai": "^4.3.4",
     "chai-http": "^4.3.0",
     "cookie-parser": "~1.4.4",

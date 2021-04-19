@@ -1,4 +1,4 @@
-console.log(require('dotenv').config());
+require('dotenv').config();
 require('cache-require-paths');
 var express = require('express');
 var path = require('path');

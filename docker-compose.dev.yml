@@ -1,0 +1,30 @@
+version: '3.9'
+
+services:
+   awf-quiz-api:
+      container_name: awf-quiz-api
+      build:
+         context: ./services/quiz-api
+      ports:
+         - "8080:8080"
+      environment:
+         - DB_URL=mongodb://db:27017/awf-quiz-api-dev
+         - JWT_SECRET={QUIZ_API_JWT_SECRET}
+      volumes:
+         - /app/node_modules
+         - ./services/quiz-api/:/app
+      depends_on: 
+         - db
+
+   db:
+      image: mongo
+      restart: always
+      ports:
+         - 27017:27017
+      volumes:
+         - data:/data/db
+      logging:
+         driver: none
+
+volumes:
+   data:
