@@ -50,23 +50,6 @@ describe.only('Quiz tests', () => {
         });
     });
 
-    describe('DELETE api/quiz/:id', function() {
-        it('deletes a quiz', function(done) {
-            chai.request(app)
-                .get('/api/quiz')
-                .end((err, res) => {
-                    id = res.body[0]._id
-                    var arg = ("/api/quiz/" + id)
-                    chai.request(app)
-                        .delete(arg)
-                        .end((err, res) => {
-                        expect(res).to.have.status(204);
-                        done();
-                        })
-            });
-        });
-    });
-
     describe('PATCH api/quiz/:id', function() {
         it('updates a quiz', function(done) {
             chai.request(app)
@@ -101,4 +84,22 @@ describe.only('Quiz tests', () => {
             });
         });
     });
+
+    describe('DELETE api/quiz/:id', function() {
+        it('deletes a quiz', function(done) {
+            chai.request(app)
+                .get('/api/quiz')
+                .end((err, res) => {
+                    id = res.body[0]._id
+                    var arg = ("/api/quiz/" + id)
+                    chai.request(app)
+                        .delete(arg)
+                        .end((err, res) => {
+                        expect(res).to.have.status(204);
+                        done();
+                        })
+            });
+        });
+    });
+
 });
