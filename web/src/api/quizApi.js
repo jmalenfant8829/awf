@@ -1,7 +1,11 @@
 import axios from 'axios'
 
-const postHeaders = {
-  'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+// const postHeaders = {
+//   'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+// }
+
+const postJSONHeaders = {
+  'Content-Type': 'application/json'
 }
 
 export function getAllQuizzes () {
@@ -9,5 +13,5 @@ export function getAllQuizzes () {
 }
 
 export function createQuiz (data) {
-  return axios.post('/api/quiz', data, postHeaders)
+  return axios.post('/api/quiz', data, postJSONHeaders)
 }
