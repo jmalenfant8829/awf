@@ -27,6 +27,35 @@ describe('Quiz tests', () => {
             expect(res.body[0]._id).to.equal(String(testQuiz._id));
         });
     });
+
+    describe('GET api/quiz/:id', function() {
+
+        it('get one quiz', async () => {
+
+            await testUser.save();
+            testQuiz = testUser.createdQuizzes[0];
+            await testQuiz.save();
+
+            res = await chai.request(app)
+                .get(('/api/quiz/' + testQuiz._id));
+            expect(res).to.have.status(200);
+        });
+    });
+
+    
+    describe('GET api/quiz/:id', function() {
+
+        it('search for invalid quiz id', async () => {
+
+            await testUser.save();
+            testQuiz = testUser.createdQuizzes[0];
+            await testQuiz.save();
+
+            res = await chai.request(app)
+                .get('/api/quiz/1');
+            expect(res).to.have.status(500);
+        });
+    });
     
     describe('POST api/quiz/', function() {
         it('creates a new quiz', function(done) {
@@ -60,6 +89,8 @@ describe('Quiz tests', () => {
                 });
         });
     });
+
+
  
     describe('PATCH api/quiz/:id', function() {
         it('updates a quiz', async() => {
@@ -67,13 +98,8 @@ describe('Quiz tests', () => {
             await testUser.save();
             testQuiz = testUser.createdQuizzes[0];
             await testQuiz.save();
-
-            res = await chai.request(app)
-                .get('/api/quiz');
-
-            id = res.body[0]._id;
-            var arg = ("/api/quiz/" + id);
-
+            
+            var arg = ("/api/quiz/" + testQuiz._id);
             res = await chai.request(app)
                 .patch(arg)
                 .send({"title": "New Test",
@@ -105,15 +131,40 @@ describe('Quiz tests', () => {
             await testUser.save();
             testQuiz = testUser.createdQuizzes[0];
             await testQuiz.save();
-
-            res = await chai.request(app)
-                .get('/api/quiz');
-            id = res.body[0]._id;
-            var arg = ("/api/quiz/" + id);
+            var arg = ("/api/quiz/" + testQuiz._id);
 
             res = await chai.request(app)
                 .delete(arg);
             expect(res).to.have.status(204);
+        });
+    });
+
+    describe('GET api/quiz/:id/like', function() {
+        it('Likes/unlikes a quiz', async() => {
+
+            await testUser.save();
+            testQuiz = testUser.createdQuizzes[0];
+            await testQuiz.save();
+            
+            var arg = ("/api/quiz/" + testQuiz._id + "/like");
+            res = await chai.request(app)
+                .get(arg)
+            expect(res).to.have.status(204);
+        });
+    });
+
+    describe('GET api/quiz/search', function() {
+        it('Return quizzes that match search word', async() => {
+            
+            await testUser.save();
+            testQuiz = testUser.createdQuizzes[0];
+            await testQuiz.save();
+            
+            var arg = ("/api/quiz/search");
+            res = await chai.request(app)
+                .get(arg)
+                .query({search: String(testQuiz.title)})
+            expect(res.body[0]._id).to.equal(String(testQuiz._id));
         });
     });
 
