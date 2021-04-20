@@ -3,6 +3,8 @@ import { loginUser, registerUser } from '../../api/authApi'
 import { decodeToken, setToken } from '../../utils/tokenUtils'
 import { setUser } from '../user/userActions'
 import { LOG_IN_USER, REGISTER_USER } from './authActions'
+import { setSuccess } from '../success/successActions'
+import { setError } from '../error/errorActions'
 
 function * registerUserAsync (action) {
   try {
@@ -10,11 +12,13 @@ function * registerUserAsync (action) {
 
     console.log(data)
 
-    // TODO: Link to error and success reducers
+    yield put(setError('register', undefined))
+    yield put(setSuccess('register', 'Signed up successfully'))
   } catch (err) {
     console.log('Could not sign up user', err)
 
-    // TODO: Link to error and success reducers
+    yield put(setError('register', 'Could not sign up'))
+    yield put(setSuccess('register', undefined))
   }
 }
 
@@ -32,11 +36,13 @@ function * logInUserAsync (action) {
       ...decoded
     }))
 
-    // TODO: Link to error and success reducers
+    yield put(setSuccess('login', 'Logged in successfully'))
+    yield put(setError('login', undefined))
   } catch (err) {
     console.log('Could not log in user', err)
 
-    // TODO: Link to error and success reducers
+    yield put(setSuccess('login', undefined))
+    yield put(setError('login', 'Could not log in'))
   }
 }
 

@@ -2,14 +2,14 @@ import React from 'react'
 import styles from './TextInput.module.scss'
 import PropTypes from 'prop-types'
 
-const TextInput = (props) => {
+const TextInput = ({ error, className, ...rest }) => {
   return (
-        <div className={styles.wrapper}>
+        <div className={`${styles.wrapper} ${className}`}>
             <div className={styles.inputmain}>
-                <input className={styles.input} {...props} />
+                <input className={styles.input} {...rest} />
             </div>
 
-            <span className={styles.error}>{props.error}</span>
+            <span className={styles.error}>{error}</span>
         </div>
   )
 }

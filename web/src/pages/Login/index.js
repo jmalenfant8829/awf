@@ -5,6 +5,7 @@ import FullscreenForm from '../../components/FullscreenForm'
 import TextInput from '../../components/TextInput'
 import { connect } from 'react-redux'
 import { logInuser } from '../../redux/auth/authActions'
+import Alert from '../../components/Alert'
 
 class Login extends Component {
   constructor (props) {
@@ -21,37 +22,46 @@ class Login extends Component {
     }
   }
 
-    onChange = (e) => {
-      this.setState((prevState) => ({
-        ...prevState,
-        [e.target.name]: e.target.value
-      }))
+  onChange = (e) => {
+    this.setState((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value
+    }))
+  }
+
+  onSubmit = (e) => {
+    e.preventDefault()
+
+    const { username, password } = this.state
+
+    this.props.loginUser({ username, password })
+  }
+
+  render () {
+    if (this.props.success) {
+      setTimeout(() => this.props.history.push('/dashboard'), 1000)
     }
 
-    onSubmit = (e) => {
-      e.preventDefault()
+    return (
+          <BackgroundGradient>
+              <FullscreenForm heading="LOG IN">
+                  <Alert type="error" message={this.props.error} />
+                  <Alert type="success" message={this.props.success} />
 
-      const { username, password } = this.state
+                  <TextInput type="text" name="username" placeholder="Username" onChange={this.onChange} />
+                  <TextInput type="password" name="password" placeholder="Password" onChange={this.onChange} />
 
-      this.props.loginUser({ username, password })
-    }
-
-    render () {
-      return (
-            <BackgroundGradient>
-                <FullscreenForm heading="LOG IN">
-                    <TextInput type="text" name="username" placeholder="Username" onChange={this.onChange} />
-                    <TextInput type="password" name="password" placeholder="Password" onChange={this.onChange} />
-
-                    <Button size="fullwidth" color="primary" onClick={this.onSubmit}>Log in</Button>
-                </FullscreenForm>
-            </BackgroundGradient>
-      )
-    }
+                  <Button size="fullwidth" color="primary" onClick={this.onSubmit}>Log in</Button>
+              </FullscreenForm>
+          </BackgroundGradient>
+    )
+  }
 }
 
 const mapStateToProps = (state) => ({
-  user: state.user.self
+  user: state.user.self,
+  success: state.success.login,
+  error: state.error.login
 })
 
 const mapDispatchToProps = (dispatch) => ({

@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Link, Route, Switch } from 'react-router-dom'
 import Button from '../../components/Button'
 import { destroyToken } from '../../utils/tokenUtils'
+import CreateQuiz from '../DashboardPages/CreateQuiz'
 import MyQuizzes from '../DashboardPages/MyQuizzes'
 import styles from './Dashboard.module.scss'
 
@@ -36,7 +37,7 @@ class Dashboard extends Component {
                         <div className={styles['navbar--inner']}>
                             <Link to="/dashboard" className={styles['navbar--item']}>My Quizzes</Link>
                             <Link to="/dashboard/find" className={styles['navbar--item']}>Find Quizzes</Link>
-                            <Link to="/dashboard/create" className={styles['navbar--item']}>Create a Quiz</Link>
+                            <Link to="/dashboard/quiz/create" className={styles['navbar--item']}>Create a Quiz</Link>
                         </div>
                     </div>
                 </header>
@@ -44,6 +45,7 @@ class Dashboard extends Component {
                 <section className={styles.content}>
                     <Switch>
                         <Route exact path="/dashboard" component={MyQuizzes} />
+                        <Route exact path="/dashboard/quiz/create" component={CreateQuiz} />
                     </Switch>
                 </section>
             </>
