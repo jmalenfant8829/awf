@@ -1,5 +1,5 @@
-require('cache-require-paths');
 require('dotenv').config();
+require('cache-require-paths');
 var express = require('express');
 var path = require('path');
 var cors = require('cors');
@@ -23,7 +23,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 //define routes
-var api = require('./routes/api');
-app.use('/api', api);
+var quizApi = require('./routes/quiz/api');
+app.use('/api', quizApi);
+
+var authApi = require('./routes/auth');
+app.use('/api/auth', authApi);
 
 module.exports = app;

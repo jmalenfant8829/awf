@@ -1,18 +1,21 @@
 const mongoose = require("mongoose");
-const Question = require("./question");
+const Answer = require("./answer");
 const Quiz = require("./quiz");
 
 //test that selected answer is a part of the quiz
-async function singleQuizValidator(answer, thisContext) {
-    var thisQuizId = thisContext.quizId;
-    question = await Question.findById(answer.questionId);
+async function singleQuizValidator(answerId, thisQuizResult) {
 
-    if (question) {
-        return (String(thisQuizId) === String(question.quizId));
+    var result = false;
+    var quizOfAnswer = await Quiz.findOne({ 'questions.answers._id': answerId });
+
+    if (quizOfAnswer) {
+        result = (String(thisQuizResult.quizId) === String(quizOfAnswer.id));
     }
     else {
-        return false;
+        result = false;
     }
+
+    return result;
 }
 
 var quizResultSchema = new mongoose.Schema({

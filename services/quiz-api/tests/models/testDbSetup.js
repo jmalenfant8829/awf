@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 before(async () => {
-    await mongoose.connect('mongodb://localhost/awf-quiz-api-test-db',
+    
+    await mongoose.connect(process.env.DB_URL,
         {
             useCreateIndex: true,
             useNewUrlParser: true,

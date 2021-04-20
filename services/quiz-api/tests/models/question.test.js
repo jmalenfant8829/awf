@@ -13,28 +13,15 @@ describe("Question Model", function () {
     });
 
     it('should be invalid without question description', function (done) {
-        var question = new Question({
-            quizId: testUser.createdQuizzes[0].id,
-        });
+        var question = new Question({ });
         question.validate(function (err) {
             expect(err.errors.description).to.exist;
             done();
         });
     });
 
-    it('should be invalid without quiz', function (done) {
-        var question = new Question({
-            description: faker.lorem.sentence(),
-        });
-        question.validate(function (err) {
-            expect(err.errors.quizId).to.exist;
-            done();
-        });
-    });
-
     it('should be valid with valid description', function (done) {
         var question = new Question({
-            quizId: testUser.createdQuizzes[0].id,
             description: faker.lorem.sentence(),
         });
         question.validate(function (err) {
@@ -45,7 +32,6 @@ describe("Question Model", function () {
 
     it('should be valid given answer array', function (done) {
         var question = new Question({
-            quizId: testUser.createdQuizzes[0].id,
             description: faker.lorem.sentence(),
             answers: [
                 new Answer({
