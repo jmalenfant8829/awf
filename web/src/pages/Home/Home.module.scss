@@ -1,0 +1,19 @@
+@import "../../variables.scss";
+
+.header {
+    width: 100%;
+    height: clamp(20vh, 27vh, 40vh);
+
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+
+    &--btn-box {
+        display: inline-block;
+
+        :first-child {
+            margin-right: 2rem;
+        }
+    }
+}
