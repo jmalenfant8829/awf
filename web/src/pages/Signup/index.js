@@ -1,78 +1,76 @@
-import React, { Component } from "react";
-import Button from "../../components/Button";
-import BackgroundGradient from "../../components/BackgroundGradient";
-import Heading from "../../components/Heading";
-import FullscreenForm from "../../components/FullscreenForm";
-import TextInput from "../../components/TextInput";
-import styles from "./Signup.module.scss";
-import { connect } from "react-redux";
-import { registerUser } from "../../redux/auth/authActions";
+import React, { Component } from 'react'
+import Button from '../../components/Button'
+import BackgroundGradient from '../../components/BackgroundGradient'
+import FullscreenForm from '../../components/FullscreenForm'
+import TextInput from '../../components/TextInput'
+import { connect } from 'react-redux'
+import { registerUser } from '../../redux/auth/authActions'
 
 class Signup extends Component {
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
 
     this.state = {
-      errors: {},
-    };
+      errors: {}
+    }
   }
 
-  componentDidMount() {
-    const { user } = this.props;
+  componentDidMount () {
+    const { user } = this.props
 
     if (user && user.isAuthenticated) {
-      this.props.history.push("/dashboard");
+      this.props.history.push('/dashboard')
     }
   }
 
   onChange = (e) => {
     this.setState((prevState) => ({
       ...prevState,
-      [e.target.name]: e.target.value,
-    }));
+      [e.target.name]: e.target.value
+    }))
   };
 
   onSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    const { username, email, password, passwordConfirm } = this.state;
+    const { username, email, password, passwordConfirm } = this.state
 
-    const errors = {};
+    const errors = {}
 
     if (!username) {
-      errors.username = "Please enter a username";
+      errors.username = 'Please enter a username'
     }
 
     if (!email) {
-      errors.email = "Please enter an email";
+      errors.email = 'Please enter an email'
     }
 
     if (!password) {
-      errors.password = "Please enter a password";
+      errors.password = 'Please enter a password'
     }
 
     if (!passwordConfirm || passwordConfirm !== password) {
-      errors.passwordConfirm = "Passwords do not match";
+      errors.passwordConfirm = 'Passwords do not match'
     }
 
     this.setState((prevState) => ({
       ...prevState,
-      errors,
-    }));
+      errors
+    }))
 
     if (Object.keys(errors).length > 0) {
-      return;
+      return
     }
 
     this.props.registerUser({
       username,
       email,
-      password,
-    });
+      password
+    })
   };
 
-  render() {
-    const { errors } = this.state;
+  render () {
+    const { errors } = this.state
 
     return (
       <BackgroundGradient>
@@ -111,16 +109,16 @@ class Signup extends Component {
           </Button>
         </FullscreenForm>
       </BackgroundGradient>
-    );
+    )
   }
 }
 
 const mapStateToProps = (state) => ({
-  user: state.user.self,
-});
+  user: state.user.self
+})
 
 const mapDispatchToProps = (dispatch) => ({
-  registerUser: (credentials) => dispatch(registerUser(credentials)),
-});
+  registerUser: (credentials) => dispatch(registerUser(credentials))
+})
 
-export default connect(mapStateToProps, mapDispatchToProps)(Signup);
+export default connect(mapStateToProps, mapDispatchToProps)(Signup)

@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import Heading from '../../../../components/Heading'
+import Heading from '../../../components/Heading'
 
 class FindQuizzes extends Component {
   render () {
     return (
-            <>
-                <Heading>Find Quizzes</Heading>
-            </>
+      <>
+        <Heading>Find Quizzes</Heading>
+      </>
     )
   }
 }

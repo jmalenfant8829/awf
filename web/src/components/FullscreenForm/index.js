@@ -1,10 +1,10 @@
 import React from 'react'
-import styles from "./FullscreenForm.module.scss"
-import PropTypes from "prop-types"
+import styles from './FullscreenForm.module.scss'
+import PropTypes from 'prop-types'
 import Heading from '../Heading'
 
 const FullscreenForm = (props) => {
-    return (
+  return (
         <div className={styles.form}>
             <div className={styles['form-header']}>
                 <Heading size="title">{props.heading}</Heading>
@@ -12,11 +12,11 @@ const FullscreenForm = (props) => {
 
             {props.children}
         </div>
-    )
+  )
 }
 
 FullscreenForm.propTypes = {
-    heading: PropTypes.string,
+  heading: PropTypes.string
 }
 
 export default FullscreenForm
