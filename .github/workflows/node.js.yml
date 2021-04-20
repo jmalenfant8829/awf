@@ -13,6 +13,16 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    
+    services:
+      mongodb:
+        image: mongo
+        ports:
+          - 27017:27017
+    
+    env:
+      JWT_SECRET: ${{ secrets.JWT_SECRET }}
+      DB_URL: mongodb://localhost:27017/awf-quiz-api-test
 
     strategy:
       matrix:
@@ -31,3 +41,4 @@ jobs:
       working-directory: services/quiz-api
     - run: npm test
       working-directory: services/quiz-api
+      
