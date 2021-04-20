@@ -7,8 +7,8 @@ on:
   push:
     branches:
       - main
-	paths:
-	  - 'services/quiz-api/**'
+	    paths:
+	      - 'services/quiz-api/**'
   workflow_dispatch:
 
 jobs:
