@@ -1,15 +1,20 @@
 var Quiz = require("../models/quiz")
 var User = require("../models/user")
-
+var mongoose = require('mongoose');
 function load(req, res, next, id){
-    Quiz.findById(id)
-        .populate('questions')
-        .exec()
-        .then((quiz) => {
-            req.dbQuiz = quiz;
-            return next();
+    if(mongoose.Types.ObjectId.isValid(id)) {
+        Quiz.findById(id)
+            .populate('questions')
+            .exec()
+            .then((quiz) => {
+                req.dbQuiz = quiz;
+                return next();
 
-        }, (e) => next(e));
+            }, (e) => next(e));
+    }
+    else {
+        res.status(500).json({message: 'invalid id'})
+    }
 }
 
 function get(req, res) {
