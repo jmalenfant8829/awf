@@ -1,0 +1,61 @@
+@import "../../../variables.scss";
+
+.container {
+    padding-top: 2rem;
+}
+
+.nameinput {
+    width: 100%;
+}
+
+.form {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    font-size: 1.4rem;
+
+    &__questions {
+        border-left: 1px solid $color-background-offwhite;
+        border-right: 1px solid $color-background-offwhite;
+        border-bottom: 1px solid $color-background-offwhite;
+        padding: 0.5rem;
+        grid-column: 1;
+
+        >div {
+            width: 100%;
+            padding: 1rem;
+            background: $color-background-input;
+            margin-bottom: 1rem;
+            margin-top: 0.5rem;
+            font-weight: bold;
+            border-radius: 0.3rem;
+            user-select: none;
+
+            &:hover {
+                cursor: pointer;
+                background-color: darken($color-background-input, 5%);
+            }
+        }
+    }
+
+    &__question-edit {
+        border-right: 1px solid $color-background-offwhite;
+        border-bottom: 1px solid $color-background-offwhite;
+        padding: 0.5rem;
+        grid-column: 2;
+    }
+
+    &__header {
+        padding: 0.5rem;
+        font-size: 2rem;
+        font-weight: 500;
+        background-color: $color-background-offwhite;
+    }
+}
+
+.answerentry {
+    display: flex;
+}
+
+.error {
+    border: 2px solid red;
+}

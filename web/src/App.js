@@ -1,25 +1,25 @@
 import React, { Component } from 'react'
-import { Route, Switch } from "react-router";
-import "./App.scss";
-import Home from "./pages/Home";
-import Signup from "./pages/Signup";
-import Login from "./pages/Login";
-import Dashboard from "./pages/Dashboard";
-import { decodeToken, destroyToken, getToken } from './utils/tokenUtils';
-import { setUser } from './redux/user/userActions';
-import { connect } from 'react-redux';
-import ProtectedRoute from './components/ProtectedRoute';
+import { Route, Switch } from 'react-router'
+import './App.scss'
+import Home from './pages/Home'
+import Signup from './pages/Signup'
+import Login from './pages/Login'
+import Dashboard from './pages/Dashboard'
+import { decodeToken, destroyToken, getToken } from './utils/tokenUtils'
+import { setUser } from './redux/user/userActions'
+import { connect } from 'react-redux'
+import ProtectedRoute from './components/ProtectedRoute'
 
 class App extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.state = {
-      tokenChecked: false,
+      tokenChecked: false
     }
   }
 
-  componentDidMount() {
+  componentDidMount () {
     const token = getToken()
 
     if (token) {
@@ -31,7 +31,7 @@ class App extends Component {
         destroyToken()
         this.props.setUser({ isAuthenticated: false })
         this.setState({
-          tokenChecked: true,
+          tokenChecked: true
         })
         return
       }
@@ -44,17 +44,16 @@ class App extends Component {
     }
 
     this.setState({
-      tokenChecked: true,
+      tokenChecked: true
     })
   }
 
-  render() {
-    const { tokenChecked } = this.state;
+  render () {
+    const { tokenChecked } = this.state
 
     if (!tokenChecked) {
       return <h1>Loading...</h1>
     }
-
 
     return (
       <div className="App">
@@ -62,10 +61,10 @@ class App extends Component {
           <Route exact path="/" component={Home} />
           <Route exact path="/signup" component={Signup} />
           <Route exact path="/login" component={Login} />
-          <ProtectedRoute exact path="/dashboard" component={Dashboard} />
+          <ProtectedRoute path="/dashboard" component={Dashboard} />
         </Switch>
       </div>
-    );
+    )
   }
 }
 
@@ -73,4 +72,4 @@ const mapDispatchToProps = (dispatch) => ({
   setUser: (user) => dispatch(setUser(user))
 })
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(null, mapDispatchToProps)(App)
