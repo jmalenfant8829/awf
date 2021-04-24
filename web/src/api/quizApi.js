@@ -17,3 +17,11 @@ export function getAllQuizzes () {
 export function createQuiz (data) {
   return axios.post(backendURL + '/api/quiz', data, postJSONHeaders)
 }
+
+export function deleteQuiz (quizId) {
+  return axios.delete(backendURL + `/api/quiz/${quizId}`)
+}
+
+export function updateQuiz (quizId, data) {
+  return axios.patch(backendURL + `/api/quiz/${quizId}`, data, postJSONHeaders)
+}
