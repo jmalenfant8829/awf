@@ -1,10 +1,13 @@
 const chai = require('chai');
 var expect = require('chai').expect;
 const chaiHttp = require('chai-http');
+const chaiAsPromised = require("chai-as-promised");
 const faker = require('faker');
 var app = require("../../../app");
+var User = require("../../../models/user");
 
 chai.use(chaiHttp);
+chai.use(chaiAsPromised);
 
 describe("Registration Route", function () {
 
@@ -19,6 +22,7 @@ describe("Registration Route", function () {
             .post("/api/auth/register")
             .send(user);
 
+        expect(User.findOne({ username: user.username })).to.be.fulfilled;
         expect(res).to.have.status(200);
         expect(res.body.success).to.be.true;
     });
@@ -33,6 +37,7 @@ describe("Registration Route", function () {
             .post("/api/auth/register")
             .send(user);
 
+        expect(User.findOne({ username: user.username })).to.be.rejectedWith(Error);
         expect(res).to.have.status(400);
         expect(res.body.success).to.be.false;
     });
@@ -47,6 +52,7 @@ describe("Registration Route", function () {
             .post("/api/auth/register")
             .send(user);
 
+        expect(User.findOne({ username: user.username })).to.be.rejectedWith(Error);
         expect(res).to.have.status(400);
         expect(res.body.success).to.be.false;
     });
@@ -61,6 +67,7 @@ describe("Registration Route", function () {
             .post("/api/auth/register")
             .send(user);
 
+        expect(User.findOne({ username: user.username })).to.be.rejectedWith(Error);
         expect(res).to.have.status(400);
         expect(res.body.success).to.be.false;
     });
@@ -76,6 +83,7 @@ describe("Registration Route", function () {
             .post("/api/auth/register")
             .send(user);
 
+        expect(User.findOne({ username: user.username })).to.be.rejectedWith(Error);
         expect(res).to.have.status(400);
         expect(res.body.success).to.be.false;
     });
