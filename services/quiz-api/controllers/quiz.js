@@ -13,7 +13,7 @@ function load(req, res, next, id){
             }, (e) => next(e));
     }
     else {
-        res.status(500).json({message: 'invalid id'})
+        res.status(400).json({message: 'invalid id'})
     }
 }
 

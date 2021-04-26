@@ -1,6 +1,7 @@
 require('dotenv').config();
 require('cache-require-paths');
 var express = require('express');
+require('express-async-errors');
 var path = require('path');
 var cors = require('cors');
 var cookieParser = require('cookie-parser');

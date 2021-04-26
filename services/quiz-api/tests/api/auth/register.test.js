@@ -22,7 +22,8 @@ describe("Registration Route", function () {
             .post("/api/auth/register")
             .send(user);
 
-        expect(User.findOne({ username: user.username })).to.be.fulfilled;
+        addedUser = await User.findOne({ username: user.username });
+        expect(addedUser).to.be.not.be.null;
         expect(res).to.have.status(200);
         expect(res.body.success).to.be.true;
     });

@@ -29,15 +29,18 @@ module.exports.getTestUser = function() {
 
     user.createdQuizzes[0].questions.push(quiz1question1, quiz1question2);
     user.createdQuizzes[1].questions.push(quiz2question1, quiz2question2);
+    user.createdQuizzes[0].markModified('questions');
 
     // define correct/incorrect answers to questions
     quiz1question1answer1 = new Answer({ description: faker.lorem.sentence(), isCorrect: true });
     quiz1question1answer2 = new Answer({ description: faker.lorem.sentence(), isCorrect: false });
+
     quiz1question2answer1 = new Answer({ description: faker.lorem.sentence(), isCorrect: true });
     quiz1question2answer2 = new Answer({ description: faker.lorem.sentence(), isCorrect: false });
     
     quiz2question1answer1 = new Answer({ description: faker.lorem.sentence(), isCorrect: true });
     quiz2question1answer2 = new Answer({ description: faker.lorem.sentence(), isCorrect: false });
+    
     quiz2question2answer1 = new Answer({ description: faker.lorem.sentence(), isCorrect: true });
     quiz2question2answer2 = new Answer({ description: faker.lorem.sentence(), isCorrect: false });
 
