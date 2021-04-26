@@ -5,7 +5,9 @@ import Button from '../../components/Button'
 import { destroyToken } from '../../utils/tokenUtils'
 import CreateQuiz from '../DashboardPages/CreateQuiz'
 import MyQuizzes from '../DashboardPages/MyQuizzes'
+import FindQuizzes from '../DashboardPages/FindQuizzes'
 import styles from './Dashboard.module.scss'
+import TakeQuiz from '../DashboardPages/TakeQuiz/TakeQuiz'
 
 class Dashboard extends Component {
     onLogOutClick = () => {
@@ -36,7 +38,7 @@ class Dashboard extends Component {
                     <div className={styles.navbar}>
                         <div className={styles['navbar--inner']}>
                             <Link to="/dashboard" className={styles['navbar--item']}>My Quizzes</Link>
-                            <Link to="/dashboard/find" className={styles['navbar--item']}>Find Quizzes</Link>
+                            <Link to="/dashboard/quizzes" className={styles['navbar--item']}>Find Quizzes</Link>
                             <Link to="/dashboard/quiz/create" className={styles['navbar--item']}>Create a Quiz</Link>
                         </div>
                     </div>
@@ -46,6 +48,8 @@ class Dashboard extends Component {
                     <Switch>
                         <Route exact path="/dashboard" component={MyQuizzes} />
                         <Route exact path="/dashboard/quiz/create" component={CreateQuiz} />
+                        <Route exact path="/dashboard/quizzes" component={FindQuizzes} />
+                        <Route exact path="/dashboard/quiz/respond/:id" component={TakeQuiz} />
                     </Switch>
                 </section>
             </>
