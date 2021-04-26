@@ -1,4 +1,5 @@
 var quizCtrl = require( '../../controllers/quiz')
+var quizResultCtrl = require( '../../controllers/quizResult')
 
 //require('../../config/passport')(passport);
 var express = require('express');
@@ -25,7 +26,14 @@ router.route('/quiz/:quizId')
 router.route('/quiz/:quizId/like')
     .get(quizCtrl.like);
 
+
+router.route('/quiz/:quizId/result/:username')
+    .get(quizResultCtrl.get)
+    .put(quizResultCtrl.submit);
+
+
 router.param('quizId', quizCtrl.load);
+router.param('username', quizResultCtrl.loadUser);
 
 module.exports = router;
 

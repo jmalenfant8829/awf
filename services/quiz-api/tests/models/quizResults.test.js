@@ -1,6 +1,10 @@
 var expect = require('chai').expect;
 var QuizResult = require("../../models/quizResult");
 
+var Answer = require("../../models/answer");
+var Quiz = require("../../models/quiz");
+var Question = require("../../models/question");
+
 const getTestUser = require("../../testUtils/schemaSamples").getTestUser;
 
 describe("Quiz Result Model", function () {
@@ -61,13 +65,22 @@ describe("Quiz Result Model", function () {
        expect(err).to.not.exist;
     });
 
-    // it('should calculate score from answers given for fully completed quiz', function (done) {
-    //     expect(true).to.be.false;
-    //     done();
-    // });
+    it('should calculate score from answers given for fully completed quiz', async () => {
 
-    // it('should calculate score from answers given for partially completed quiz', function (done) {
-    //     expect(true).to.be.false;
-    //     done();
-    // });
+        await testUser.save();
+        await testUser.createdQuizzes[0].save();
+
+        var quizResult = QuizResult({
+            userId: testUser.id,
+            quizId: testUser.createdQuizzes[0].id,
+            selectedAnswers: [
+                testUser.createdQuizzes[0].questions[0].answers[0],
+                testUser.createdQuizzes[0].questions[1].answers[1],
+            ],
+        });
+
+        await quizResult.save();
+        expect(quizResult.score).to.equal(0.50);
+        
+    });
 });

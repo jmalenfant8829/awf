@@ -104,3 +104,4 @@ dist
 .tern-port
 .vscode/launch.json
 services/quiz-api/.cache-require-paths.json
+web/.jshintrc
