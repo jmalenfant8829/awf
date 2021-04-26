@@ -38,7 +38,7 @@ function * deleteQuizAsync (action) {
 
 function * submitResponseAsync (action) {
   try {
-    yield call(submitResponse, action.quizId, action.payload)
+    yield call(submitResponse, action.quizId, action.username, action.payload)
 
     yield put(setSuccess('response', 'Response submitted'))
     yield put(setError('response', undefined))

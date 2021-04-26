@@ -26,6 +26,7 @@ export function updateQuiz (quizId, data) {
   return axios.patch(backendURL + `/api/quiz/${quizId}`, data, postJSONHeaders)
 }
 
-export function submitResponse (quizId, data) {
-  return axios.post(backendURL + `/api/quiz/response/${quizId}`, data, postJSONHeaders)
+export function submitResponse (quizId, username, data) {
+  console.log(quizId, username)
+  return axios.put(backendURL + `/api/quiz/${quizId}/result/${username}`, data, postJSONHeaders)
 }

@@ -22,8 +22,9 @@ export const deleteQuiz = (quizId) => ({
 })
 
 export const SUBMIT_RESPONSE = 'SUBMIT_RESPONSE'
-export const submitResponse = (quizId, data) => ({
+export const submitResponse = (quizId, username, data) => ({
   type: SUBMIT_RESPONSE,
   quizId: quizId,
+  username: username,
   payload: data
 })
