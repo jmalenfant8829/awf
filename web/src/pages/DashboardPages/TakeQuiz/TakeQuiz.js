@@ -2,15 +2,19 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Button from '../../../components/Button'
 import Heading from '../../../components/Heading'
-import { getAllQuizzes } from '../../../redux/quiz/quizActions'
+import { getAllQuizzes, submitResponse } from '../../../redux/quiz/quizActions'
 import styles from './TakeQuiz.module.scss'
+import Alert from '../../../components/Alert'
 
 class TakeQuiz extends Component {
   constructor (props) {
     super(props)
 
     this.state = {
-      quiz: null
+      quiz: null,
+      answers: {},
+      errors: {},
+      submitted: false
     }
   }
 
@@ -53,8 +57,35 @@ class TakeQuiz extends Component {
     }))
   }
 
+  onSubmitClicked = () => {
+    const { answers, quiz } = this.state
+
+    const errors = {}
+    let errorsExist = false
+
+    quiz.questions.forEach(question => {
+      if (!answers[question._id]) {
+        errors[question._id] = 'Please select an aswer'
+        errorsExist = true
+      }
+    })
+
+    this.setState((prevState) => ({
+      ...prevState,
+      errors: errors
+    }))
+
+    if (errorsExist) {
+      return
+    }
+
+    console.log(this.props.self.username)
+
+    this.props.submitResponse(quiz._id, this.props.self.username, { selectedAnswers: Object.values(answers) })
+  }
+
   render () {
-    const { quiz } = this.state
+    const { quiz, errors, submitted } = this.state
 
     console.log(this.state)
 
@@ -72,7 +103,8 @@ class TakeQuiz extends Component {
 
     return (
       <>
-        <Heading>Taking Quiz: {quiz.title}</Heading>
+        <Alert type="error" message={this.props.error} />
+        <Alert type="success" message={this.props.success} />
 
         <div className={styles.questions}>
           {questions.map((question, i) => (
@@ -83,7 +115,7 @@ class TakeQuiz extends Component {
               <div className={styles.question__answers}>
                 {question.answers.map((answer, i) => (
                   <>
-                    <label className={styles.answer}>
+                    <label className={`${styles.answer} ${submitted && answer.isCorrect ? styles.correct : ''}`}>
                       <input
                         name={question._id}
                         value={answer._id}
@@ -95,22 +127,28 @@ class TakeQuiz extends Component {
                   </>
                 ))}
               </div>
+
+              <div className={styles.error}>{errors[question._id]}</div>
             </div>
           ))}
         </div>
 
-        <Button>Submit Response</Button>
+        <Button onClick={this.onSubmitClicked}>Submit Response</Button>
       </>
     )
   }
 }
 
 const mapStateToProps = (state) => ({
-  quizzes: state.quiz.quizzes
+  self: state.user.self,
+  quizzes: state.quiz.quizzes,
+  error: state.error.response,
+  success: state.success.response
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  getAllQuizzes: () => dispatch(getAllQuizzes())
+  getAllQuizzes: () => dispatch(getAllQuizzes()),
+  submitResponse: (quizId, username, answers) => dispatch(submitResponse(quizId, username, answers))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(TakeQuiz)
