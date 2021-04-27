@@ -4,6 +4,7 @@ import styles from './QuizResults.module.scss'
 import Heading from '../../../components/Heading'
 import { IconContext } from 'react-icons'
 import { HiOutlineHeart, HiHeart } from 'react-icons/hi'
+import { likeQuiz } from '../../../redux/quiz/quizActions'
 
 class QuizResults extends Component {
   constructor (props) {
@@ -58,7 +59,8 @@ const mapStateToProps = (state) => ({
   quizzes: state.quiz.quizzes
 })
 
-const mapDispatchToProps = () => ({
+const mapDispatchToProps = (dispatch) => ({
+  likeQuiz: (quizId) => dispatch(likeQuiz(quizId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuizResults)

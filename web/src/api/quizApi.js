@@ -31,6 +31,9 @@ export function updateQuiz (quizId, data) {
 }
 
 export function submitResponse (quizId, username, data) {
-  console.log(quizId, username)
   return axios.put(backendURL + `/api/quiz/${quizId}/result/${username}`, data, postJSONHeaders)
+}
+
+export function likeQuiz (quizId) {
+  return axios.post(backendURL + `/api/quiz/${quizId}/like`)
 }

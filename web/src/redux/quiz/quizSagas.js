@@ -1,5 +1,5 @@
 import { all, call, put, takeLatest } from 'redux-saga/effects'
-import { createQuiz, deleteQuiz, getAllQuizzes, submitResponse } from '../../api/quizApi'
+import { createQuiz, deleteQuiz, getAllQuizzes, likeQuiz, submitResponse } from '../../api/quizApi'
 import { setError } from '../error/errorActions'
 import { setSuccess } from '../success/successActions'
 import { CREATE_QUIZ, DELETE_QUIZ, GET_ALL_QUIZZES, setAllQuizzes, SUBMIT_RESPONSE } from './quizActions'
@@ -50,6 +50,20 @@ function * submitResponseAsync (action) {
   }
 }
 
+function * likeQuizAsync (action) {
+  try {
+    yield call(likeQuiz, action.quizId)
+
+    yield put(setSuccess('like', 'Quiz liked'))
+    yield put(setError('like', undefined))
+  } catch (err) {
+    console.log('Could not like quiz', err)
+
+    yield put(setSuccess('like', undefined))
+    yield put(setError('like', 'Could not like quiz'))
+  }
+}
+
 function * watchCreateQuiz () {
   yield takeLatest(CREATE_QUIZ, createQuizAsync)
 }
@@ -66,11 +80,16 @@ function * watchSubmitResponse () {
   yield takeLatest(SUBMIT_RESPONSE, submitResponseAsync)
 }
 
+function * watchLikeQuiz () {
+  yield takeLatest(LIKE_QUIZ, likeQuizAsync)
+}
+
 export default function * quizSagas () {
   yield all([
     call(watchCreateQuiz),
     call(watchGetAllQuizzes),
     call(watchDeleteQuiz),
-    call(watchSubmitResponse)
+    call(watchSubmitResponse),
+    call(watchLikeQuiz)
   ])
 }
