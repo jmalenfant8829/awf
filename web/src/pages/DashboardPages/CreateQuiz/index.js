@@ -206,6 +206,7 @@ class CreateQuiz extends Component {
     })
 
     this.props.createQuiz({
+      userId: this.props.self._id,
       title: name,
       questions: finalQuestions
     })
@@ -316,6 +317,7 @@ class CreateQuiz extends Component {
 }
 
 const mapStateToProps = (state) => ({
+  self: state.user.self,
   success: state.success.createquiz,
   error: state.error.createquiz
 })

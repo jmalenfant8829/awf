@@ -10,8 +10,12 @@ const postJSONHeaders = {
   'Content-Type': 'application/json'
 }
 
-export function getAllQuizzes () {
-  return axios.get(backendURL + '/api/quiz/')
+export function getAllQuizzes (search) {
+  if (search) {
+    return axios.get(backendURL + '/api/quiz/search?search=' + search)
+  } else {
+    return axios.get(backendURL + '/api/quiz/')
+  }
 }
 
 export function createQuiz (data) {
