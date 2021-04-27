@@ -29,3 +29,9 @@ export const submitResponse = (quizId, username, data) => ({
   username: username,
   payload: data
 })
+
+export const LIKE_QUIZ = 'LIKE_QUIZ'
+export const likeQuiz = (quizId) => ({
+  type: LIKE_QUIZ,
+  quizId: quizId
+})
