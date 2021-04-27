@@ -32,7 +32,12 @@ async function submit(req, res) {
     
     await quizResult.save();
 
-    return res.status(200).json({message: "Success!", score: quizResult.score});
+    return res.status(200).json({
+        message: "Success!",
+        score: quizResult.score,
+        totalCorrect: quizResult.totalCorrect,
+        totalQuestions: quizResult.totalQuestions,
+    });
 }
 
 async function get(req, res) {

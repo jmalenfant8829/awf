@@ -47,10 +47,23 @@ var quizResultSchema = new mongoose.Schema({
     score: {
         type: mongoose.Schema.Types.Number,
     },
+
+    // number of correct answers in quiz
+    totalCorrect: {
+        type: mongoose.Schema.Types.Number,
+    },
+
+    // number of answers in quiz
+    totalQuestions: {
+        type: mongoose.Schema.Types.Number,
+    },
 });
 
 quizResultSchema.pre('save', async function () {
-    this.score = await quizResultScore(this);
+    const scoreValues = await quizResultScore(this);
+    this.score = scoreValues.score;
+    this.totalCorrect = scoreValues.totalCorrect;
+    this.totalQuestions = scoreValues.totalAnswers;
 });
 
 async function quizResultScore(thisQuizResult) {
@@ -59,6 +72,7 @@ async function quizResultScore(thisQuizResult) {
     const questions = quiz.questions;
 
     var numCorrect = 0;
+    var totalQuestions = 0;
 
     for (var i = 0; i < questions.length; i++) {
         answers = questions[i].answers;
@@ -75,14 +89,21 @@ async function quizResultScore(thisQuizResult) {
                 numCorrect++;
             }
         }
+        totalQuestions++;
     }
 
     var score = 0;
     if (answers.length !== 0) {
-        score = numCorrect / answers.length;
+        score = numCorrect / totalQuestions;
     }
     
-    return score;
+    scoreValues = {
+        score: score,
+        totalCorrect: numCorrect,
+        totalAnswers: totalQuestions,
+    };
+
+    return scoreValues;
 };
 
 module.exports = mongoose.model('QuizResult', quizResultSchema);
