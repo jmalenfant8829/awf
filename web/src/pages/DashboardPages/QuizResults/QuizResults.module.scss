@@ -1,0 +1,50 @@
+@import "../../../variables.scss";
+
+.main {
+    width: 100%;
+
+    * {
+        margin-left: auto;
+        margin-right: auto;
+        width: fit-content;
+        height: fit-content;
+    }
+}
+
+.score {
+    display: flex;
+    flex-direction: row;
+    font-size: 4rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.score-total {
+    font-size: 2rem;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 0.25em
+}
+
+.like-bar {
+    display: flex;
+    flex-direction: row;
+    font-size: 2rem;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2em;
+    user-select: none;
+}
+
+.like-button {
+    display: flex;
+    
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 0.5em;
+}
