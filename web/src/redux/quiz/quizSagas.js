@@ -2,7 +2,7 @@ import { all, call, put, takeLatest } from 'redux-saga/effects'
 import { createQuiz, deleteQuiz, getAllQuizzes, likeQuiz, submitResponse } from '../../api/quizApi'
 import { setError } from '../error/errorActions'
 import { setSuccess } from '../success/successActions'
-import { CREATE_QUIZ, DELETE_QUIZ, GET_ALL_QUIZZES, setAllQuizzes, SUBMIT_RESPONSE } from './quizActions'
+import { CREATE_QUIZ, DELETE_QUIZ, GET_ALL_QUIZZES, setAllQuizzes, SUBMIT_RESPONSE, LIKE_QUIZ } from './quizActions'
 
 function * createQuizAsync (action) {
   try {
