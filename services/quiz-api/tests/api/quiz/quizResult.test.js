@@ -47,6 +47,8 @@ describe("Quiz Result Route", function () {
         const addedQuizRes = await QuizResult.findOne({'userId': testUser.id});
         expect(addedQuizRes).to.not.be.null;
         expect(res.body.score).to.equal(1/2);
+        expect(res.body.totalCorrect).to.equal(1);
+        expect(res.body.totalQuestions).to.equal(2);
     });
 
     it('should update existing quizresult', async () => {
@@ -74,6 +76,7 @@ describe("Quiz Result Route", function () {
             .send(selectedAnswers);
 
         expect(res.body.score).to.equal(0.5);
+        expect(res.body.totalCorrect).to.equal(1);
 
         // update with new answers
         const newAnswers = {
@@ -92,6 +95,8 @@ describe("Quiz Result Route", function () {
         const addedQuizRes = await QuizResult.findOne({'userId': testUser.id});
         expect(addedQuizRes).to.not.be.null;
         expect(res.body.score).to.equal(1);
+        expect(res.body.totalCorrect).to.equal(2);
+        expect(res.body.totalQuestions).to.equal(2);
     });
 
     it('should get quizresult', async () => {
@@ -124,6 +129,8 @@ describe("Quiz Result Route", function () {
         expect(res.status).to.equal(200);
         expect(res.body.selectedAnswers[0]).to.equal(String(question1.answers[0]._id));
         expect(res.body.score).to.equal(1/2);
+        expect(res.body.totalCorrect).to.equal(1);
+        expect(res.body.totalQuestions).to.equal(2);
     });
 
 });
