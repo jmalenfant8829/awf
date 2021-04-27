@@ -1,4 +1,4 @@
-FROM node:latest as builder
+FROM node:14-alpine as builder
 
 WORKDIR /app
 ENV REACT_APP_BACKEND_URL https://quizzery-api.azurewebsites.net
