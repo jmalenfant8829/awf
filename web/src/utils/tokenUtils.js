@@ -10,7 +10,7 @@ export function setToken (token) {
 
   localStorage.setItem('token', token)
 
-  axios.defaults.headers.common.Authorization = `Bearer ${token}`
+  axios.defaults.headers.common.Authorization = `JWT ${token}`
 }
 
 export function destroyToken () {
@@ -27,7 +27,7 @@ export function getToken () {
   }
 
   // Instruct axios to send this token with all requests
-  axios.defaults.headers.common.Authorization = `Bearer ${token}`
+  axios.defaults.headers.common.Authorization = `JWT ${token}`
 
   return token
 }
