@@ -1,8 +1,8 @@
 import { all, call, put, takeLatest } from 'redux-saga/effects'
-import { createQuiz, deleteQuiz, getAllQuizzes, likeQuiz, submitResponse } from '../../api/quizApi'
+import { createQuiz, deleteQuiz, getAllQuizzes, likeQuiz, submitResponse, getQuizScore, getQuiz } from '../../api/quizApi'
 import { setError } from '../error/errorActions'
 import { setSuccess } from '../success/successActions'
-import { CREATE_QUIZ, DELETE_QUIZ, GET_ALL_QUIZZES, setAllQuizzes, SUBMIT_RESPONSE } from './quizActions'
+import { CREATE_QUIZ, DELETE_QUIZ, GET_ALL_QUIZZES, setAllQuizzes, SUBMIT_RESPONSE, LIKE_QUIZ, GET_QUIZ_SCORE, GET_QUIZ } from './quizActions'
 
 function * createQuizAsync (action) {
   try {
@@ -52,15 +52,43 @@ function * submitResponseAsync (action) {
 
 function * likeQuizAsync (action) {
   try {
-    yield call(likeQuiz, action.quizId)
+    const { data } = yield call(likeQuiz, action.quizId, action.userId)
 
-    yield put(setSuccess('like', 'Quiz liked'))
+    yield put(setSuccess('like', data.liked))
     yield put(setError('like', undefined))
   } catch (err) {
     console.log('Could not like quiz', err)
 
     yield put(setSuccess('like', undefined))
     yield put(setError('like', 'Could not like quiz'))
+  }
+}
+
+function * getQuizScoreAsync (action) {
+  try {
+    const { data } = yield call(getQuizScore, action.quizId, action.username)
+
+    yield put(setSuccess('score', data))
+    yield put(setError('score', undefined))
+  } catch (err) {
+    console.log('Could not get quiz score', err)
+
+    yield put(setSuccess('score', undefined))
+    yield put(setError('score', 'Could not get quiz score'))
+  }
+}
+
+function * getQuizAsync (action) {
+  try {
+    const { data } = yield call(getQuiz, action.quizId)
+
+    yield put(setSuccess('quiz', data))
+    yield put(setError('quiz', undefined))
+  } catch (err) {
+    console.log('Could not get quiz', err)
+
+    yield put(setSuccess('quiz', undefined))
+    yield put(setError('quiz', 'Could not get quiz'))
   }
 }
 
@@ -84,12 +112,22 @@ function * watchLikeQuiz () {
   yield takeLatest(LIKE_QUIZ, likeQuizAsync)
 }
 
+function * watchQuizScore () {
+  yield takeLatest(GET_QUIZ_SCORE, getQuizScoreAsync)
+}
+
+function * watchGetQuiz () {
+  yield takeLatest(GET_QUIZ, getQuizAsync)
+}
+
 export default function * quizSagas () {
   yield all([
     call(watchCreateQuiz),
     call(watchGetAllQuizzes),
     call(watchDeleteQuiz),
     call(watchSubmitResponse),
-    call(watchLikeQuiz)
+    call(watchLikeQuiz),
+    call(watchQuizScore),
+    call(watchGetQuiz)
   ])
 }

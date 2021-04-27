@@ -94,9 +94,11 @@ async function like(req, res) {
     if (idx !== -1) {
         // remove it from the array.
         quiz.likers.splice(idx, 1);
+        res.json({liked: false});
     }
     else {
         quiz.likers.push(userId);
+        res.json({liked: true});
     }
     await quiz.save();
     res.sendStatus(204);

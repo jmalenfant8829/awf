@@ -31,7 +31,21 @@ export const submitResponse = (quizId, username, data) => ({
 })
 
 export const LIKE_QUIZ = 'LIKE_QUIZ'
-export const likeQuiz = (quizId) => ({
+export const likeQuiz = (quizId, userId) => ({
   type: LIKE_QUIZ,
+  quizId: quizId,
+  userId: userId
+})
+
+export const GET_QUIZ_SCORE = 'GET_QUIZ_SCORE'
+export const getQuizScore = (quizId, username) => ({
+  type: GET_QUIZ_SCORE,
+  quizId: quizId,
+  username: username
+})
+
+export const GET_QUIZ = 'GET_SCORE'
+export const getQuiz = (quizId) => ({
+  type: GET_QUIZ,
   quizId: quizId
 })
