@@ -8,6 +8,7 @@ import MyQuizzes from '../DashboardPages/MyQuizzes'
 import FindQuizzes from '../DashboardPages/FindQuizzes'
 import styles from './Dashboard.module.scss'
 import TakeQuiz from '../DashboardPages/TakeQuiz/TakeQuiz'
+import QuizResults from '../DashboardPages/QuizResults/QuizResults'
 
 class Dashboard extends Component {
     onLogOutClick = () => {
@@ -50,6 +51,7 @@ class Dashboard extends Component {
                         <Route exact path="/dashboard/quiz/create" component={CreateQuiz} />
                         <Route exact path="/dashboard/quizzes" component={FindQuizzes} />
                         <Route exact path="/dashboard/quiz/respond/:id" component={TakeQuiz} />
+                        <Route exact path="/dashboard/quiz/finished/:id/:score" component={QuizResults} />
                     </Switch>
                 </section>
             </>
