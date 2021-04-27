@@ -1,7 +1,7 @@
 var quizCtrl = require( '../../controllers/quiz')
 var quizResultCtrl = require( '../../controllers/quizResult')
 
-//require('../../config/passport')(passport);
+const passport = require('passport');
 var express = require('express');
 var router = express.Router();
 
@@ -12,7 +12,7 @@ var router = express.Router();
 //specifying name
 router.route('/quiz')
     .get(quizCtrl.list)
-    .post(quizCtrl.create);
+    .post(passport.authenticate('jwt', { session: false }), quizCtrl.create);
 
 router.route('/quiz/search')
     .get(quizCtrl.search)
@@ -20,16 +20,16 @@ router.route('/quiz/search')
 //Fetches question and other data for a single quiz
 router.route('/quiz/:quizId')
     .get(quizCtrl.get)
-    .patch(quizCtrl.update)
-    .delete(quizCtrl.remove);
+    .patch(passport.authenticate('jwt', { session: false }), quizCtrl.update)
+    .delete(passport.authenticate('jwt', { session: false }), quizCtrl.remove);
 
 router.route('/quiz/:quizId/like')
-    .get(quizCtrl.like);
+    .post(passport.authenticate('jwt', { session: false }), quizCtrl.like);
 
 
 router.route('/quiz/:quizId/result/:username')
     .get(quizResultCtrl.get)
-    .put(quizResultCtrl.submit);
+    .put(passport.authenticate('jwt', { session: false }), quizResultCtrl.submit);
 
 
 router.param('quizId', quizCtrl.load);

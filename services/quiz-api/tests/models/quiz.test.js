@@ -35,6 +35,27 @@ describe("Quiz Model", function () {
         });
     });
 
+    it('should be invalid with no user ID', function (done) {
+        var quiz = new Quiz({
+            title: faker.lorem.sentence(),
+        });
+        quiz.validate(function (err) {
+            expect(err.errors.userId).to.exist;
+            done();
+        });
+    });
+
+    it('should be invalid with nonexistent user ID', function (done) {
+        var quiz = new Quiz({
+            userId: 'asdfasdf',
+            title: faker.lorem.sentence(),
+        });
+        quiz.validate(function (err) {
+            expect(err.errors.userId).to.exist;
+            done();
+        });
+    });
+
     it('should be valid given valid array of users who have liked quiz', function (done) {
         var quiz = new Quiz({
             userId: testUser.id,
