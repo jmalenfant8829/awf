@@ -6,10 +6,9 @@ const getTestUser = require("../../../testUtils/schemaSamples").getTestUser;
 const Quiz = require('../../../models/quiz');
 
 chai.use(chaiHttp);
-describe.only('Quiz tests', () => {
+describe('Quiz tests', () => {
 
     var testUser;
-    var token;
 
     beforeEach( async () => {
         testUser = await getTestUser();

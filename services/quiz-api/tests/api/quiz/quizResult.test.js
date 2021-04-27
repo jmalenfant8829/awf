@@ -20,7 +20,12 @@ describe("Quiz Result Route", function () {
     });
 
     it('should create quizresult for quiz with no existing quizresult', async () => {
+        const preSavePassword = testUser.password;
         await testUser.save();
+        res = await chai.request(app)
+            .post('/api/auth/login')
+            .send({ 'username': testUser.username, 'password': preSavePassword, });
+        const jwtToken = res.body.token;
         await testUser.createdQuizzes[0].save();
 
         const question1 = user.createdQuizzes[0].questions[0];
@@ -35,6 +40,7 @@ describe("Quiz Result Route", function () {
 
         res = await chai.request(app)
             .put("/api/quiz/" + testUser.createdQuizzes[0]._id  + "/result/" + testUser.username)
+            .set({ Authorization: jwtToken })
             .send(selectedAnswers);
 
         expect(res.status).to.equal(200);
@@ -44,7 +50,12 @@ describe("Quiz Result Route", function () {
     });
 
     it('should update existing quizresult', async () => {
+        const preSavePassword = testUser.password;
         await testUser.save();
+        res = await chai.request(app)
+            .post('/api/auth/login')
+            .send({ 'username': testUser.username, 'password': preSavePassword, });
+        const jwtToken = res.body.token;
         await testUser.createdQuizzes[0].save();
 
         const question1 = user.createdQuizzes[0].questions[0];
@@ -59,6 +70,7 @@ describe("Quiz Result Route", function () {
 
         res = await chai.request(app)
             .put("/api/quiz/" + testUser.createdQuizzes[0]._id  + "/result/" + testUser.username)
+            .set({ Authorization: jwtToken })
             .send(selectedAnswers);
 
         expect(res.body.score).to.equal(0.5);
@@ -73,6 +85,7 @@ describe("Quiz Result Route", function () {
 
         res = await chai.request(app)
             .put("/api/quiz/" + testUser.createdQuizzes[0]._id  + "/result/" + testUser.username)
+            .set({ Authorization: jwtToken })
             .send(newAnswers);
 
         expect(res.status).to.equal(200);
@@ -82,7 +95,12 @@ describe("Quiz Result Route", function () {
     });
 
     it('should get quizresult', async () => {
+        const preSavePassword = testUser.password;
         await testUser.save();
+        res = await chai.request(app)
+            .post('/api/auth/login')
+            .send({ 'username': testUser.username, 'password': preSavePassword, });
+        const jwtToken = res.body.token;
         await testUser.createdQuizzes[0].save();
 
         const question1 = user.createdQuizzes[0].questions[0];
@@ -97,6 +115,7 @@ describe("Quiz Result Route", function () {
 
         res = await chai.request(app)
             .put("/api/quiz/" + testUser.createdQuizzes[0]._id  + "/result/" + testUser.username)
+            .set({ Authorization: jwtToken })
             .send(selectedAnswers);
 
         res = await chai.request(app)
