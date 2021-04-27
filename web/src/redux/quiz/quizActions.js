@@ -5,8 +5,9 @@ export const createQuiz = (data) => ({
 })
 
 export const GET_ALL_QUIZZES = 'GET_ALL_QUIZZES'
-export const getAllQuizzes = () => ({
-  type: GET_ALL_QUIZZES
+export const getAllQuizzes = (search) => ({
+  type: GET_ALL_QUIZZES,
+  search: search
 })
 
 export const SET_ALL_QUIZZES = 'SET_ALL_QUIZZES'

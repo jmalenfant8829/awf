@@ -3,11 +3,22 @@ import { connect } from 'react-redux'
 import Heading from '../../../components/Heading'
 import { getAllQuizzes } from '../../../redux/quiz/quizActions'
 import styles from './FindQuizzes.module.scss'
+import TextInput from '../../../components/TextInput/index'
+import Button from '../../../components/Button/index'
 
 class FindQuizzes extends Component {
+  constructor () {
+    super()
+    this.state = {
+      search: null
+    }
+  }
+
   static getDerivedStateFromProps (nextProps, prevState) {
-    if (!nextProps.quizzes) {
-      nextProps.getAllQuizzes()
+    console.log(nextProps, prevState)
+    if (!nextProps.quizzes || prevState.update_quizzes) {
+      nextProps.getAllQuizzes(prevState.search)
+      prevState.update_quizzes = false
     }
 
     return prevState
@@ -15,6 +26,24 @@ class FindQuizzes extends Component {
 
   onQuizTakeClick = (quizId) => () => {
     this.props.history.push(`/dashboard/quiz/respond/${quizId}`)
+  }
+
+  onQuizNewClick = () => () => {
+    this.props.history.push('/dashboard/quiz/create')
+  }
+
+  onQuizSearchClick = () => () => {
+    this.setState((prevState) => ({
+      search: prevState['search-text'],
+      update_quizzes: true
+    }))
+  }
+
+  onChange = (e) => {
+    this.setState((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value
+    }))
   }
 
   render () {
@@ -27,6 +56,34 @@ class FindQuizzes extends Component {
     return (
       <>
         <Heading>Viewing Quizzes</Heading>
+
+        <div className={styles['quiz-list-search-bar']}>
+          <Button
+                onClick={this.onQuizNewClick()}
+                key='qs-1'>
+            Create New Quiz!
+          </Button>
+
+          <div
+                className={styles['quiz-list-search-gap']}
+                key='qs-2'/>
+
+          <TextInput
+                className={styles['quiz-list-search']}
+                type="text"
+                name="search-text"
+                placeholder="Search"
+                onChange={this.onChange}
+                error={null}
+                key='qs-3'
+              />
+
+          <Button
+              onClick={this.onQuizSearchClick()}
+              key='qs-4'>
+            Search
+          </Button>
+        </div>
 
         <div className={styles['quiz-list']}>
           {quizzes.map((quiz, i) => (
@@ -51,7 +108,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  getAllQuizzes: () => dispatch(getAllQuizzes())
+  getAllQuizzes: (search) => dispatch(getAllQuizzes(search))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(FindQuizzes)

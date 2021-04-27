@@ -20,7 +20,7 @@ function * createQuizAsync (action) {
 
 function * getAllQuizzesAsync (action) {
   try {
-    const { data } = yield call(getAllQuizzes)
+    const { data } = yield call(getAllQuizzes, action.search || null)
 
     yield put(setAllQuizzes(data))
   } catch (err) {
