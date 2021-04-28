@@ -5,6 +5,7 @@ import FullscreenForm from '../../components/FullscreenForm'
 import TextInput from '../../components/TextInput'
 import { connect } from 'react-redux'
 import { registerUser } from '../../redux/auth/authActions'
+import Alert from '../../components/Alert'
 
 class Signup extends Component {
   constructor (props) {
@@ -71,10 +72,17 @@ class Signup extends Component {
 
   render () {
     const { errors } = this.state
+    
+    if (this.props.success) {
+      setTimeout(() => this.props.history.push('/login'), 1000)
+    }
 
     return (
       <BackgroundGradient>
         <FullscreenForm heading="SIGN UP">
+          <Alert type="error" message={this.props.error} />
+          <Alert type="success" message={this.props.success} />
+      
           <TextInput
             type="text"
             name="username"
@@ -114,7 +122,9 @@ class Signup extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  user: state.user.self
+  user: state.user.self,
+  success: state.success.register,
+  error: state.error.register
 })
 
 const mapDispatchToProps = (dispatch) => ({
