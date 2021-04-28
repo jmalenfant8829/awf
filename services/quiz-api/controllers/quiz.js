@@ -90,6 +90,7 @@ async function like(req, res) {
     Object.assign(quiz, req.body);
     userId = req.body.userId;
     var idx = quiz.likers ? quiz.likers.indexOf(userId) : -1;
+    res.sendStatus(204);
     // is it valid?
     if (idx !== -1) {
         // remove it from the array.
@@ -101,7 +102,6 @@ async function like(req, res) {
         res.json({liked: true});
     }
     await quiz.save();
-    res.sendStatus(204);
 }
 
 function search(req, res, next) {
