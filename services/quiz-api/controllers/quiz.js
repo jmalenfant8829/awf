@@ -90,18 +90,16 @@ async function like(req, res) {
     Object.assign(quiz, req.body);
     userId = req.body.userId;
     var idx = quiz.likers ? quiz.likers.indexOf(userId) : -1;
-    res.sendStatus(204);
     // is it valid?
     if (idx !== -1) {
         // remove it from the array.
         quiz.likers.splice(idx, 1);
-        res.json({liked: false});
     }
     else {
         quiz.likers.push(userId);
-        res.json({liked: true});
     }
     await quiz.save();
+    return res.status(200).json({liked: idx === -1});
 }
 
 function search(req, res, next) {

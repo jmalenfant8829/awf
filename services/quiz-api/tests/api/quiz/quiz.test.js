@@ -217,7 +217,7 @@ describe('Quiz tests', () => {
                 .send({
                     userId: testUser.id,
                 });
-            expect(res).to.have.status(204);
+            expect(res).to.have.status(200);
             likedQuiz = await Quiz.findById(testQuiz.id);
             expect(likedQuiz.likers).to.include(testUser.id);
         });
@@ -243,7 +243,7 @@ describe('Quiz tests', () => {
                 .send({
                     userId: testUser.id,
                 });
-            expect(res).to.have.status(204);
+            expect(res).to.have.status(200);
             likedQuiz = await Quiz.findById(testQuiz.id);
             expect(likedQuiz.likers).to.include(testUser.id);
 
@@ -254,7 +254,7 @@ describe('Quiz tests', () => {
                 .send({
                     userId: testUser.id,
                 });
-            expect(res).to.have.status(204);
+            expect(res).to.have.status(200);
             likedQuiz = await Quiz.findById(testQuiz.id);
             expect(likedQuiz.likers).to.not.include(testUser.id);
         });
