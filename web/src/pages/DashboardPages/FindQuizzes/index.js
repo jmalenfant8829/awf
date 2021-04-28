@@ -7,18 +7,18 @@ import TextInput from '../../../components/TextInput/index'
 import Button from '../../../components/Button/index'
 
 class FindQuizzes extends Component {
-  constructor () {
-    super()
+  constructor (props) {
+    super(props)
     this.state = {
       search: null
     }
+
+    props.getAllQuizzes(this.state.search)
   }
 
   static getDerivedStateFromProps (nextProps, prevState) {
-    console.log(nextProps, prevState)
-    if (!nextProps.quizzes || prevState.update_quizzes) {
+    if (!nextProps.quizzes) {
       nextProps.getAllQuizzes(prevState.search)
-      prevState.update_quizzes = false
     }
 
     return prevState
@@ -34,9 +34,10 @@ class FindQuizzes extends Component {
 
   onQuizSearchClick = () => () => {
     this.setState((prevState) => ({
-      search: prevState['search-text'],
-      update_quizzes: true
-    }))
+      search: prevState['search-text']
+    }), () => {
+      this.props.getAllQuizzes(this.state.search)
+    })
   }
 
   onChange = (e) => {

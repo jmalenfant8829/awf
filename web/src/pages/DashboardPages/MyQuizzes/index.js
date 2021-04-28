@@ -5,6 +5,14 @@ import { getAllQuizzes, deleteQuiz } from '../../../redux/quiz/quizActions'
 import styles from './MyQuizzes.module.scss'
 
 class MyQuizzes extends Component {
+  constructor (props) {
+    super(props)
+
+    this.state = {}
+
+    props.getAllQuizzes()
+  }
+
   static getDerivedStateFromProps (nextProps, prevState) {
     if (!nextProps.quizzes) {
       nextProps.getAllQuizzes()

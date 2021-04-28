@@ -34,6 +34,16 @@ export function submitResponse (quizId, username, data) {
   return axios.put(backendURL + `/api/quiz/${quizId}/result/${username}`, data, postJSONHeaders)
 }
 
-export function likeQuiz (quizId) {
-  return axios.post(backendURL + `/api/quiz/${quizId}/like`)
+export function likeQuiz (quizId, userId) {
+  return axios.post(backendURL + `/api/quiz/${quizId}/like`, {
+    userId: userId
+  })
+}
+
+export function getQuizScore (quizId, username) {
+  return axios.get(backendURL + `/api/quiz/${quizId}/result/${username}`)
+}
+
+export function getQuiz (quizId) {
+  return axios.get(backendURL + `/api/quiz/${quizId}`)
 }

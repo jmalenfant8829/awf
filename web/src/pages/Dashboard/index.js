@@ -51,7 +51,7 @@ class Dashboard extends Component {
                         <Route exact path="/dashboard/quiz/create" component={CreateQuiz} />
                         <Route exact path="/dashboard/quizzes" component={FindQuizzes} />
                         <Route exact path="/dashboard/quiz/respond/:id" component={TakeQuiz} />
-                        <Route exact path="/dashboard/quiz/finished/:id/:score" component={QuizResults} />
+                        <Route exact path="/dashboard/quiz/finished/:id" component={QuizResults} />
                     </Switch>
                 </section>
             </>

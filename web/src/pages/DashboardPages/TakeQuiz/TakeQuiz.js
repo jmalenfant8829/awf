@@ -5,6 +5,7 @@ import Heading from '../../../components/Heading'
 import { getAllQuizzes, submitResponse } from '../../../redux/quiz/quizActions'
 import styles from './TakeQuiz.module.scss'
 import Alert from '../../../components/Alert'
+import { setSuccess } from '../../../redux/success/successActions'
 
 class TakeQuiz extends Component {
   constructor (props) {
@@ -44,6 +45,11 @@ class TakeQuiz extends Component {
 
     prevState.quiz = quiz
 
+    if (nextProps.success && quiz) {
+      nextProps.clearSuccess('response')
+      nextProps.history.push(`/dashboard/quiz/finished/${quiz._id}`)
+    }
+
     return prevState
   }
 
@@ -78,8 +84,6 @@ class TakeQuiz extends Component {
     if (errorsExist) {
       return
     }
-
-    console.log(this.props.self.username)
 
     this.props.submitResponse(quiz._id, this.props.self.username, { selectedAnswers: Object.values(answers) })
   }
@@ -148,7 +152,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   getAllQuizzes: () => dispatch(getAllQuizzes()),
-  submitResponse: (quizId, username, answers) => dispatch(submitResponse(quizId, username, answers))
+  submitResponse: (quizId, username, answers) => dispatch(submitResponse(quizId, username, answers)),
+  clearSuccess: (pname) => dispatch(setSuccess(pname, undefined))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(TakeQuiz)
