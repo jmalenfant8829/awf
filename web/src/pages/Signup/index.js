@@ -72,7 +72,6 @@ class Signup extends Component {
 
   render () {
     const { errors } = this.state
-    
     if (this.props.success) {
       setTimeout(() => this.props.history.push('/login'), 1000)
     }
@@ -82,7 +81,6 @@ class Signup extends Component {
         <FullscreenForm heading="SIGN UP">
           <Alert type="error" message={this.props.error} />
           <Alert type="success" message={this.props.success} />
-      
           <TextInput
             type="text"
             name="username"
